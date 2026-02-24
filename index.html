@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Al-Zahrani Chip Codes v2.5 | نظام أكواد الشرائح المتقدم</title>
+    <title>Al-Zahrani Chip Codes v3.5 | نظام أكواد الشرائح</title>
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="data:application/manifest+json,{
@@ -29,14 +29,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-    <!-- SheetJS for Excel Import -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* نفس التصميم السابق مع إضافة بعض التحسينات */
+        /* نفس التصميم السابق مع بعض التحسينات */
         * {
             margin: 0;
             padding: 0;
@@ -85,12 +82,10 @@
             height: -webkit-fill-available;
         }
 
-        /* RTL/LTR Support */
         html[dir="ltr"] * {
             font-family: 'Outfit', 'Tajawal', sans-serif;
         }
 
-        /* Language Toggle */
         .lang-toggle {
             position: fixed;
             top: 16px;
@@ -123,7 +118,6 @@
             transform: scale(1.05);
         }
 
-        /* Install Button */
         .install-btn {
             position: fixed;
             bottom: 20px;
@@ -173,18 +167,6 @@
             }
         }
 
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4);
-            }
-            70% {
-                box-shadow: 0 0 0 15px rgba(79, 70, 229, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
-            }
-        }
-
         .container {
             width: 100%;
             max-width: 550px;
@@ -217,7 +199,6 @@
             pointer-events: none;
         }
 
-        /* Logo */
         .logo-container {
             text-align: center;
             margin-bottom: 25px;
@@ -252,7 +233,6 @@
             font-weight: 400;
         }
 
-        /* Forms */
         .input-group {
             margin-bottom: 20px;
         }
@@ -275,44 +255,6 @@
             font-size: 16px;
             transition: all 0.3s ease;
             outline: none;
-        }
-
-        /* Custom File Input */
-        .file-input-wrapper {
-            position: relative;
-            margin-bottom: 15px;
-        }
-
-        .file-input-wrapper input[type="file"] {
-            position: absolute;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-            z-index: 2;
-        }
-
-        .file-input-label {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 16px 18px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 2px dashed var(--glass-border);
-            border-radius: 16px;
-            color: var(--text-muted);
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-
-        .file-input-label i {
-            font-size: 20px;
-            color: var(--primary);
-        }
-
-        .file-input-wrapper:hover .file-input-label {
-            border-color: var(--primary);
-            background: rgba(79, 70, 229, 0.1);
         }
 
         .input-field:focus {
@@ -339,35 +281,6 @@
             gap: 10px;
             position: relative;
             overflow: hidden;
-        }
-
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 5px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.5);
-            opacity: 0;
-            border-radius: 100%;
-            transform: scale(1, 1) translate(-50%);
-            transform-origin: 50% 50%;
-        }
-
-        .btn:active::after {
-            animation: ripple 0.6s ease-out;
-        }
-
-        @keyframes ripple {
-            0% {
-                transform: scale(0, 0);
-                opacity: 0.5;
-            }
-            100% {
-                transform: scale(40, 40);
-                opacity: 0;
-            }
         }
 
         .btn:hover:not(:active) {
@@ -402,7 +315,6 @@
             background: linear-gradient(135deg, #3b82f6, #2563eb);
         }
 
-        /* Search Tabs */
         .search-tabs {
             display: flex;
             gap: 10px;
@@ -431,7 +343,6 @@
             box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
         }
 
-        /* Result Cards */
         .result-card {
             background: rgba(16, 185, 129, 0.15);
             border: 1px solid rgba(16, 185, 129, 0.3);
@@ -466,10 +377,8 @@
         .no-result .result-code {
             color: var(--error);
             font-size: clamp(16px, 4vw, 18px);
-            font-family: 'Tajawal', 'Outfit', sans-serif;
         }
 
-        /* Admin Dashboard */
         .dashboard-header {
             display: flex;
             justify-content: space-between;
@@ -532,49 +441,6 @@
             border-color: var(--primary);
         }
 
-        /* Import Section */
-        .import-section {
-            background: rgba(255,255,255,0.03);
-            border: 2px dashed var(--glass-border);
-            padding: 20px;
-            border-radius: 20px;
-            margin-bottom: 25px;
-        }
-
-        .import-title {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-muted);
-            margin-bottom: 15px;
-            font-size: 14px;
-        }
-
-        .import-title i {
-            color: var(--success);
-        }
-
-        /* Sample Data Button */
-        .sample-data-btn {
-            background: rgba(245, 158, 11, 0.1);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            color: var(--accent);
-            padding: 10px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.3s;
-        }
-
-        .sample-data-btn:hover {
-            background: rgba(245, 158, 11, 0.2);
-        }
-
-        /* Lists */
         .list-container {
             max-height: 400px;
             overflow-y: auto;
@@ -664,12 +530,6 @@
             transform: scale(1.1);
         }
 
-        .delete-btn svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        /* Admin Login Link */
         .admin-login-link {
             color: var(--text-muted);
             font-size: 13px;
@@ -690,7 +550,6 @@
             gap: 8px;
         }
 
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -754,7 +613,6 @@
             transform: rotate(90deg);
         }
 
-        /* Loading */
         .loading-screen {
             text-align: center;
         }
@@ -774,7 +632,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Stats Card */
         .stats-card {
             background: rgba(255,255,255,0.03);
             border-radius: 16px;
@@ -800,7 +657,6 @@
             color: var(--text-muted);
         }
 
-        /* Toast Notification */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -832,7 +688,6 @@
             background: var(--warning);
         }
 
-        /* Utilities */
         .hidden {
             display: none !important;
         }
@@ -851,7 +706,6 @@
             align-items: center;
         }
 
-        /* Responsive Adjustments */
         @media (max-width: 480px) {
             body {
                 padding: 10px;
@@ -871,30 +725,12 @@
                 border-radius: 50%;
             }
             
-            .install-btn i {
-                margin: 0;
-            }
-            
             .admin-nav {
                 flex-direction: column;
             }
             
             .nav-btn {
                 width: 100%;
-            }
-            
-            .modal-content {
-                padding: 20px;
-            }
-        }
-
-        @media (min-width: 768px) and (max-width: 1024px) {
-            .container {
-                max-width: 700px;
-            }
-            
-            .glass-panel {
-                padding: 40px;
             }
         }
     </style>
@@ -921,8 +757,8 @@
     <div id="loading-screen" class="container loading-screen">
         <div class="glass-panel">
             <div class="loader"></div>
-            <p style="margin-top: 20px; color: var(--text-muted);" data-i18n="loading">جاري الاتصال بالنظام...</p>
-            <p style="font-size: 12px; color: var(--text-muted); margin-top: 10px;" id="loading-status">جاري تحميل البيانات...</p>
+            <p style="margin-top: 20px; color: var(--text-muted);" data-i18n="loading">جاري تحميل البيانات...</p>
+            <p style="font-size: 12px; color: var(--text-muted); margin-top: 10px;" id="loading-status">جاري التحميل...</p>
         </div>
     </div>
 
@@ -930,7 +766,7 @@
     <div id="public-screen" class="container hidden">
         <div class="glass-panel">
             <div class="logo-container">
-                <img src="https://cdn-icons-png.flaticon.com/512/3208/3208726.png" alt="Logo" class="logo-img" id="system-logo">
+                <img src="https://cdn-icons-png.flaticon.com/512/3208/3208726.png" alt="Logo" class="logo-img">
                 <h1 data-i18n="app_title">نظام أكواد الشرائح</h1>
                 <h2 data-i18n="app_subtitle">مجموعة الزهراني</h2>
             </div>
@@ -946,8 +782,8 @@
                 <form id="search-by-plate-form" onsubmit="handleSearchByPlate(event)">
                     <div class="input-group">
                         <input type="text" id="plate-search" class="input-field" 
-                               placeholder="أدخل رقم اللوحة (مثال: أ ب ج 123 أو ABC123)" 
-                               required data-i18n-placeholder="search_plate_placeholder">
+                               placeholder="أدخل رقم اللوحة (مثال: ٧٥٠٣ س ص ب)" 
+                               required>
                     </div>
                     <button type="submit" class="btn">
                         <i class="fas fa-search"></i>
@@ -961,8 +797,8 @@
                 <form id="search-by-code-form" onsubmit="handleSearchByCode(event)">
                     <div class="input-group">
                         <input type="text" id="code-search" class="input-field" 
-                               placeholder="أدخل كود الشريحة (مثال: 123456)" 
-                               required data-i18n-placeholder="search_code_placeholder">
+                               placeholder="أدخل كود الشريحة (مثال: 2213)" 
+                               required>
                     </div>
                     <button type="submit" class="btn btn-info">
                         <i class="fas fa-search"></i>
@@ -973,33 +809,31 @@
 
             <!-- Result Display -->
             <div id="search-result" class="result-card hidden">
-                <div class="result-title">
-                    <span data-i18n="result_text">نتيجة البحث</span>
-                </div>
+                <div class="result-title">نتيجة البحث</div>
                 <div class="result-code" id="res-code">...</div>
                 <div style="margin-top: 10px; color: var(--text-muted); font-size: 14px;" id="res-plate"></div>
             </div>
 
             <div id="search-error" class="result-card no-result hidden">
-                <div class="result-code" data-i18n="no_result">عذراً، البيانات غير موجودة في النظام</div>
+                <div class="result-code">عذراً، البيانات غير موجودة في النظام</div>
             </div>
 
             <!-- Stats -->
-            <div class="stats-card" id="public-stats">
+            <div class="stats-card">
                 <div class="stat-item">
                     <div class="stat-value" id="total-plates-count">0</div>
-                    <div class="stat-label" data-i18n="total_plates">إجمالي اللوحات</div>
+                    <div class="stat-label">إجمالي اللوحات</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-value" id="total-projects-count">0</div>
-                    <div class="stat-label" data-i18n="total_projects">المشاريع</div>
+                    <div class="stat-label">المشاريع</div>
                 </div>
             </div>
 
             <!-- Admin Login Link -->
             <div onclick="showAdminLogin()" class="admin-login-link">
                 <i class="fas fa-lock"></i>
-                <span data-i18n="admin_login_link">دخول المدير</span>
+                <span>دخول المدير</span>
             </div>
         </div>
     </div>
@@ -1007,27 +841,27 @@
     <!-- ADMIN LOGIN SCREEN -->
     <div id="login-screen" class="container hidden">
         <div class="glass-panel">
-            <h2 style="color: white; margin-bottom: 25px; text-align:center;" data-i18n="admin_panel_title">الدخول للوحة التحكم</h2>
+            <h2 style="color: white; margin-bottom: 25px; text-align:center;">الدخول للوحة التحكم</h2>
 
             <form id="login-form">
                 <div class="input-group">
-                    <label data-i18n="username">اسم المستخدم</label>
+                    <label>اسم المستخدم</label>
                     <input type="text" id="login-username" class="input-field" placeholder="أدخل اسم المستخدم" required>
                 </div>
                 <div class="input-group">
-                    <label data-i18n="password">كلمة المرور</label>
+                    <label>كلمة المرور</label>
                     <input type="password" id="login-password" class="input-field" placeholder="أدخل كلمة المرور" required>
                 </div>
-                <div id="login-error" class="hidden" style="color: var(--error); margin-bottom: 15px; font-size: 14px; text-align:center;">
+                <div id="login-error" class="hidden" style="color: var(--error); margin-bottom: 15px; text-align:center;">
                     بيانات الدخول غير صحيحة
                 </div>
                 <button type="submit" class="btn">
                     <i class="fas fa-sign-in-alt"></i>
-                    <span data-i18n="login_btn">دخول</span>
+                    <span>دخول</span>
                 </button>
                 <button type="button" onclick="showPublicScreen()" class="btn btn-secondary">
                     <i class="fas fa-arrow-right"></i>
-                    <span data-i18n="back_btn">رجوع</span>
+                    <span>رجوع</span>
                 </button>
             </form>
         </div>
@@ -1038,15 +872,15 @@
         <div class="glass-panel">
             <div class="dashboard-header">
                 <div>
-                    <div class="welcome-text" data-i18n="admin_panel">لوحة التحكم</div>
+                    <div class="welcome-text">لوحة التحكم</div>
                     <div class="user-name">
                         <i class="fas fa-user-cog"></i>
-                        <span data-i18n="admin_name">المدير: مهند</span>
+                        <span>المدير: مهند</span>
                     </div>
                 </div>
                 <button onclick="logout()" class="btn logout-btn">
                     <i class="fas fa-sign-out-alt"></i>
-                    <span data-i18n="logout">خروج</span>
+                    <span>خروج</span>
                 </button>
             </div>
 
@@ -1054,28 +888,22 @@
             <div class="stats-card">
                 <div class="stat-item">
                     <div class="stat-value" id="admin-total-plates">0</div>
-                    <div class="stat-label" data-i18n="total_plates">إجمالي اللوحات</div>
+                    <div class="stat-label">إجمالي اللوحات</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-value" id="admin-total-projects">0</div>
-                    <div class="stat-label" data-i18n="total_projects">المشاريع</div>
+                    <div class="stat-label">المشاريع</div>
                 </div>
-            </div>
-
-            <!-- Sample Data Button (للتجربة) -->
-            <div class="sample-data-btn" onclick="addSampleData()">
-                <i class="fas fa-flask"></i>
-                <span>إضافة بيانات تجريبية (نموذج)</span>
             </div>
 
             <div class="admin-nav">
                 <div class="nav-btn active" onclick="switchAdminTab('plates')">
                     <i class="fas fa-car"></i>
-                    <span data-i18n="tab_plates">اللوحات والأكواد</span>
+                    <span>اللوحات والأكواد</span>
                 </div>
                 <div class="nav-btn" onclick="switchAdminTab('projects')">
                     <i class="fas fa-project-diagram"></i>
-                    <span data-i18n="tab_projects">المشاريع</span>
+                    <span>المشاريع</span>
                 </div>
             </div>
 
@@ -1083,40 +911,13 @@
             <div id="tab-plates">
                 <button onclick="openModal('modal-add-plate')" class="btn" style="margin-bottom: 15px;">
                     <i class="fas fa-plus-circle"></i>
-                    <span data-i18n="add_plate_btn">+ إضافة لوحة جديدة</span>
+                    <span>+ إضافة لوحة جديدة</span>
                 </button>
-
-                <!-- Import Section -->
-                <div class="import-section">
-                    <div class="import-title">
-                        <i class="fas fa-file-excel"></i>
-                        <span>استيراد بيانات من Excel</span>
-                    </div>
-                    
-                    <!-- Excel Import -->
-                    <div class="file-input-wrapper">
-                        <input type="file" id="excel-file" accept=".xlsx, .xls, .csv">
-                        <div class="file-input-label">
-                            <i class="fas fa-upload"></i>
-                            <span>اختر ملف Excel الخاص بك</span>
-                        </div>
-                    </div>
-                    
-                    <button onclick="handleExcelImport()" class="btn btn-success" style="margin-top: 10px;">
-                        <i class="fas fa-file-import"></i>
-                        <span>استيراد البيانات</span>
-                    </button>
-                    
-                    <p style="color: var(--text-muted); font-size: 12px; margin-top: 10px; text-align: center;">
-                        <i class="fas fa-info-circle"></i>
-                        الملف يجب أن يحتوي على أعمدة: رقم اللوحة، الكود (ويمكن إضافة عمود المشروع)
-                    </p>
-                </div>
 
                 <!-- Search -->
                 <div class="input-group">
                     <input type="text" id="admin-search-plate" onkeyup="renderPlatesList()" class="input-field" 
-                           placeholder="بحث سريع في اللوحات والأكواد..." data-i18n-placeholder="quick_search">
+                           placeholder="بحث سريع...">
                 </div>
 
                 <!-- Plates List -->
@@ -1127,7 +928,7 @@
             <div id="tab-projects" class="hidden">
                 <button onclick="openModal('modal-add-project')" class="btn" style="margin-bottom: 20px;">
                     <i class="fas fa-plus-circle"></i>
-                    <span data-i18n="add_project_btn">+ إضافة مشروع جديد</span>
+                    <span>+ إضافة مشروع جديد</span>
                 </button>
                 <div id="projects-list" class="list-container"></div>
             </div>
@@ -1138,27 +939,21 @@
     <div id="modal-add-plate" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 data-i18n="add_plate_title">إضافة لوحة جديدة</h3>
+                <h3>إضافة لوحة جديدة</h3>
                 <button onclick="closeModal('modal-add-plate')" class="close-modal">&times;</button>
             </div>
             <form onsubmit="handleAddPlate(event)">
                 <div class="input-group">
-                    <label data-i18n="plate_label">رقم اللوحة</label>
-                    <input type="text" id="new-plate-num" class="input-field" placeholder="مثال: أ ب ج 123 أو ABC123" required>
+                    <label>رقم اللوحة</label>
+                    <input type="text" id="new-plate-num" class="input-field" placeholder="مثال: ٧٥٠٣ س ص ب" required>
                 </div>
                 <div class="input-group">
-                    <label data-i18n="code_label">كود الشريحة</label>
-                    <input type="text" id="new-plate-code" class="input-field" placeholder="مثال: 123456" required>
-                </div>
-                <div class="input-group">
-                    <label data-i18n="project_label">المشروع (اختياري)</label>
-                    <select id="new-plate-project" class="input-field">
-                        <option value="">بدون مشروع</option>
-                    </select>
+                    <label>كود الشريحة</label>
+                    <input type="text" id="new-plate-code" class="input-field" placeholder="مثال: 2213" required>
                 </div>
                 <button type="submit" class="btn">
                     <i class="fas fa-save"></i>
-                    <span data-i18n="save_btn">حفظ البيانات</span>
+                    <span>حفظ البيانات</span>
                 </button>
             </form>
         </div>
@@ -1167,158 +962,765 @@
     <div id="modal-add-project" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 data-i18n="add_project_title">إضافة مشروع جديد</h3>
+                <h3>إضافة مشروع جديد</h3>
                 <button onclick="closeModal('modal-add-project')" class="close-modal">&times;</button>
             </div>
             <form onsubmit="handleAddProject(event)">
                 <div class="input-group">
-                    <label data-i18n="project_label">اسم المشروع</label>
-                    <input type="text" id="new-project-name" class="input-field" required>
+                    <label>اسم المشروع</label>
+                    <input type="text" id="new-project-name" class="input-field" placeholder="أدخل اسم المشروع" required>
                 </div>
                 <button type="submit" class="btn">
                     <i class="fas fa-save"></i>
-                    <span data-i18n="save_btn">حفظ البيانات</span>
+                    <span>حفظ البيانات</span>
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- Firebase SDKs -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getDatabase, ref, set, push, onValue, remove, get, child } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    <script>
+        // ==================== DATA (مدمج من ملف Excel) ====================
+        // هذا هو ملف Excel الذي أرسلته - تم تحويله إلى JSON مباشرة
+        const PLATES_DATA = [
+            { code: "2213", plate: "٧ ٥ ٠ ٣ - س ص ب" },
+            { code: "8502", plate: "٦ ٦ ٥ ٨ - ب ص ب" },
+            { code: "4261", plate: "٤ ٢ ٦ ٨ - ب ص ب" },
+            { code: "6274", plate: "٤ ٢ ٥ ٨ - ب ص ص" },
+            { code: "4658", plate: "٤ ٢ ٦ ٤ - ب ص ص" },
+            { code: "2328", plate: "٤ ٢ ٧ ٠ - ص ص" },
+            { code: "3250", plate: "٨ ٥ ١ ٨ - د ل ل" },
+            { code: "1837", plate: "٨ ٥ ١ ١ - د ل ل" },
+            { code: "7478", plate: "٨ ٩ ٧ ٠ - د ط و" },
+            { code: "4778", plate: "٦ ٩ ٤ ٠ - ب ص ك" },
+            { code: "2437", plate: "٥ ٨ ٢ ٩ - ب ص ن" },
+            { code: "9736", plate: "٥ ٨ ٣ ٠ - ب ص ن" },
+            { code: "6229", plate: "٦ ٠ ٠ ٩ - ب ص ك" },
+            { code: "2801", plate: "٤ ٧ ٢ ٣ - ب ص ع" },
+            { code: "7713", plate: "٧ ٥ ٠ ٢ - ب ص س" },
+            { code: "5618", plate: "٨ ٣ ٥ ٥ - ب ص س" },
+            { code: "4236", plate: "٨ ٧ ٢ ٥ - ب ص س" },
+            { code: "3509", plate: "٨ ٣ ٥ ٦ - ب ص س" },
+            { code: "4378", plate: "٩ ٣ ٣ ٨ - ب ص ح" },
+            { code: "3852", plate: "٩ ٥ ٧ ١ - ب ص ح" },
+            { code: "7122", plate: "٣ ٥ ٧ ٨ - ب ص د" },
+            { code: "3581", plate: "٨ ٤ ٥ ٦ - ب ص ن" },
+            { code: "3157", plate: "٦ ٠ ١ ٥ - ب ص س" },
+            { code: "1686", plate: "٢ ٣ ٩ ٩ - د ط ى" },
+            { code: "2621", plate: "٨ ١ ٤ ٦ - ب د ك" },
+            { code: "4452", plate: "٨ ٣ ٣ ٦ - ب ص س" },
+            { code: "2239", plate: "٧ ٤ ٣ ٦ - ب ص ط" },
+            { code: "4075", plate: "٦ ٩ ٥ ٠ - ب ص ى" },
+            { code: "1387", plate: "٨ ٣ ٣ ١ - ر ب و" },
+            { code: "5856", plate: "٩ ٧ ٤ ٣ - ب ط س" },
+            { code: "7308", plate: "-" },
+            { code: "3125", plate: "٣ ٧ ٣ ٩ - ب ط ص" },
+            { code: "4226", plate: "٩ ٠ ٥ ٧ - ب ط ق" },
+            { code: "5865", plate: "٩ ٨ ٨ ٧ - ب ط ق" },
+            { code: "9890", plate: "٩ ٨ ٦ ٤ - ب ط ق" },
+            { code: "7325", plate: "٩ ٠ ٦ ١ - ب ط ق" },
+            { code: "7749", plate: "١ ٠ ٦ ٤ - ب ط ق" },
+            { code: "4153", plate: "٩ ٧ ٠ ٨ - ب ط س" },
+            { code: "9654", plate: "٤ ٨ ٨ ١ - ا ص س" },
+            { code: "5742", plate: "٢ ٩ ٠ ٤ - ب ع ق" },
+            { code: "4332", plate: "٤ ١ ٣ ٩ - ا ص ب" },
+            { code: "0976", plate: "٥ ٧ ٥ ٦ - د د ق" },
+            { code: "0075", plate: "٥ ٠ ٥ ٣ - د ط ك" },
+            { code: "7812", plate: "٤ ٢ ٦ ٥ - ب ص ص" },
+            { code: "8046", plate: "٤ ٢ ٩ ٦ - ب ص ص" },
+            { code: "7374", plate: "٤ ٢ ٩ ٢ - ب ص ص" },
+            { code: "0068", plate: "٤ ٢ ٧ ٢ - ب ص ص" },
+            { code: "2395", plate: "٤ ٢ ٦ ٣ - ب ص ص" },
+            { code: "1968", plate: "٤ ٢ ٧ ٦ - ب ص ص" },
+            { code: "9612", plate: "٤ ٢ ٦ ٢ - ص ص ص" },
+            { code: "3217", plate: "٤ ٢ ٧ ١ - ب ص ص" },
+            { code: "4836", plate: "٤ ٢ ٩ ٧ - ب ص ص" },
+            { code: "2841", plate: "٤ ٢ ٩ ٨ - ب ص ص" },
+            { code: "1847", plate: "٤ ٢ ٧ ٩ - ب ص ص" },
+            { code: "3149", plate: "٤ ٢ ٧ ٧ - ب ص ص" },
+            { code: "6310", plate: "٤ ٢ ٨ ٨ - ب ص ص" },
+            { code: "8782", plate: "٤ ٢ ٨ ٠ - ب ص ص" },
+            { code: "0750", plate: "-" },
+            { code: "9486", plate: "٤ ٢ ٩ ٤ - ب ص ص" },
+            { code: "3518", plate: "٤ ٢ ٨ ١ - ب ص ص" },
+            { code: "4622", plate: "٥ ٤ ٣ ٧ - د ق ق" },
+            { code: "7983", plate: "٤ ٢ ٨ ٦ - ب ص ص" },
+            { code: "7110", plate: "٢ ٨ ٥ ٥ - د ط ع" },
+            { code: "2430", plate: "٩ ١ ٠ ٣ - د ل س" },
+            { code: "3031", plate: "١ ٣ ٧ ١ - د ق ى" },
+            { code: "5994", plate: "١ ٢ ٥ ٧ - د ق ى" },
+            { code: "5014", plate: "٣ ٨ ٦ ٢ - ب ص ن" },
+            { code: "6069", plate: "٥ ٩ ٤ ٧ - ب ص م" },
+            { code: "7160", plate: "٧ ٥ ١ ١ - ب ص س" },
+            { code: "5550", plate: "٤ ٧ ٤ ١ - ب ص ع" },
+            { code: "2427", plate: "٦ ٨ ٢ ٠ - أ س ب" },
+            { code: "8011", plate: "٣ ٠ ٤ ٠ - أ س ح" },
+            { code: "2244", plate: "٦ ٨ ١ ٥ - أ س ب" },
+            { code: "5732", plate: "٦ ٨ ٤ ٥ - أ س ب" },
+            { code: "8854", plate: "٦ ٨ ٢ ٢ - أ س ب" },
+            { code: "5563", plate: "٤ ٩ ٢ ٥ - ب س ل" },
+            { code: "9847", plate: "٦ ٤ ٨ ٠ - ب ص ب" },
+            { code: "3122", plate: "٥ ٨ ١ ٥ - ب ص ن" },
+            { code: "1446", plate: "٨ ٥ ٠ ٣ - ب ص س" },
+            { code: "9828", plate: "٨ ٠ ٥ ٣ - ب ص س" },
+            { code: "1994", plate: "٤ ٢ ٧ ٨ - ب ص ص" },
+            { code: "7206", plate: "٣ ٧ ٣ ٥ - ب ط ص" },
+            { code: "1969", plate: "٤ ٢ ٧ ٥ - ب ص ص" },
+            { code: "4031", plate: "٩ ٨ ٩ ٠ - ب ط ق" },
+            { code: "8558", plate: "١ ٠ ٩ ٨ - ب ط ع" },
+            { code: "1600", plate: "٩ ٨ ٧ ٨ - ب ط ق" },
+            { code: "6261", plate: "٩ ٨ ٨ ٥ - ب ط ق" },
+            { code: "3356", plate: "١ ٩ ٤ ٧ - ب ط ع" },
+            { code: "4472", plate: "٢ ٩ ٣ ٢ - ا س م" },
+            { code: "3104", plate: "٥ ٤ ٠ ٤ - ا س ق" },
+            { code: "1758", plate: "٤ ١ ٢ ٩ - ب س ق" },
+            { code: "2932", plate: "-" },
+            { code: "5572", plate: "٤ ١ ١ ٦ - ا ص ب" },
+            { code: "9393", plate: "٤ ١ ٢ ٩ - ا ص ب" },
+            { code: "2767", plate: "٤ ١ ٢ ٨ - ا ص ب" },
+            { code: "5691", plate: "٤ ١ ٣ ٨ - ا ص ب" },
+            { code: "5413", plate: "٤ ١ ٣ ٧ - ا ص ب" },
+            { code: "3639", plate: "٤ ١ ٤ ٥ - ا ص ب" },
+            { code: "4325", plate: "٤ ١ ٢ ٤ - ا ص ب" },
+            { code: "7174", plate: "٤ ١ ٢ ٦ - ا ص ب" },
+            { code: "6794", plate: "٩ ٨ ١ ٥ - د ه ل" },
+            { code: "8409", plate: "٤ ١ ٢ ١ - ا ص م" },
+            { code: "6562", plate: "٤ ١ ٢ ٢ - ا ص م" },
+            { code: "9968", plate: "٤ ١ ٣ ٤ - ا ص ب" },
+            { code: "4455", plate: "٨ ٧ ١ ٣ - ب س د" },
+            { code: "7970", plate: "-" },
+            { code: "5554", plate: "٩ ٠ ٨ ٧ - ا س و" },
+            { code: "7237", plate: "٤ ١ ٢ ٢ - ا ص م" },
+            { code: "4690", plate: "٢ ٣ ٦ ٨ - ا س ن" },
+            { code: "6447", plate: "١ ٠ ٠ ١ - ح" },
+            { code: "8358", plate: "٤ ٢ ٧ ٤ - ب ص ص" },
+            { code: "1093", plate: "٤ ٢ ٦ ٧ - ب ص ص" },
+            { code: "4291", plate: "٤ ٢ ٩ ٩ - ب ص ص" },
+            { code: "5108", plate: "٩ ٢ ٥ ٧ - ر ح ر" },
+            { code: "6796", plate: "٨ ٨ ١ ٨ - ب ر ك" },
+            { code: "7324", plate: "٤ ٧ ٣ ١ - ص ص ع" },
+            { code: "8335", plate: "٨ ١ ٨ ٤ - أ س ح" },
+            { code: "1539", plate: "٦ ١ ٩ ٢ - ب ص ك" },
+            { code: "4066", plate: "٤ ٢ ٦ ٩ - ب ص ص" },
+            { code: "7180", plate: "٩ ٧ ٢ ١ - ب ط س" },
+            { code: "1791", plate: "٦ ١ ٣ ٧ - د ط و" },
+            { code: "1229", plate: "٦ ١ ٢ ١ - د ط و" },
+            { code: "6348", plate: "٦ ٤ ٣ ١ - د ط و" },
+            { code: "3823", plate: "٦ ١ ٣ ٣ - د ط و" },
+            { code: "4287", plate: "٤ ٢ ٦ ١ - ب ص ص" },
+            { code: "4476", plate: "٤ ٢ ٨ ٥ - ب ص ص" },
+            { code: "3156", plate: "٢ ٧ ١ ٤ - د ط ع" },
+            { code: "1920", plate: "٤ ٢ ٨ ٤ - ب ص ص" },
+            { code: "6303", plate: "٤ ٢ ٨ ٣ - ب ص ص" },
+            { code: "6502", plate: "٦ ٢ ٨ ١ - د ط و" },
+            { code: "0929", plate: "٣ ٠ ١ ٤ - د ط د" },
+            { code: "8786", plate: "٦ ١ ٠ ٤ - د ط و" },
+            { code: "0026", plate: "٥ ٠ ٤ ٦ - د ط ك" },
+            { code: "9440", plate: "٥ ٩ ٨ ٦ - د ك ط" },
+            { code: "8067", plate: "٨ ٦ ٦ ٣ - د ص د" },
+            { code: "7264", plate: "٦ ٢ ٧ ٩ - د ط و" },
+            { code: "9015", plate: "٦ ٤ ٢ ١ - د ط و" },
+            { code: "0560", plate: "٦ ٢ ٨ ٥ - د ط و" },
+            { code: "5861", plate: "٨ ٦ ٨ ٤ - د ط و" },
+            { code: "2373", plate: "٣ ٠ ٢ ٧ - د ط د" },
+            { code: "2008", plate: "٥ ٩ ٤ ٩ - د ك ط" },
+            { code: "4820", plate: "٨ ٠ ٣ ٤ - د ك م" },
+            { code: "2858", plate: "٧ ٠ ٥ ٣ - أ د أ" },
+            { code: "8621", plate: "٦ ٤ ٤ ٠ - د ط و" },
+            { code: "3073", plate: "٧ ٨ ٧ ٠ - د ق ى" },
+            { code: "3799", plate: "٤ ٢ ٩ ٥ - ص ص ب" },
+            { code: "0504", plate: "٥ ٠ ٥ ٦ - د ط ك" },
+            { code: "6753", plate: "٣ ٨ ٦ ٣ - ب ص ن" },
+            { code: "6681", plate: "٣ ٩ ٤ ٢ - ب ص ن" },
+            { code: "0207", plate: "٩ ٦ ٧ ٦ - ب ص ن" },
+            { code: "6924", plate: "٥ ٨ ١ ٦ - ب ص ن" },
+            { code: "9862", plate: "٥ ٩ ٤ ٥ - ب ص م" },
+            { code: "7806", plate: "٣ ٠ ٤ ٥ - ا س ح" },
+            { code: "2135", plate: "٥ ٢ ٦ ٩ - ا س ق" },
+            { code: "1258", plate: "٦ ٨ ٣ ٥ - ص س ك" },
+            { code: "3283", plate: "٨ ١ ٥ ٩ - ا س ح" },
+            { code: "3480", plate: "٨ ١ ٥ ٨ - ا س ح" },
+            { code: "8599", plate: "٨ ١ ٦ ٩ - ا س ح" },
+            { code: "7905", plate: "٥ ٢ ٣ ٧ - ا س ن" },
+            { code: "2833", plate: "٧ ٤ ٢ ٩ - ب ص ط" },
+            { code: "9718", plate: "٨ ١ ٧ ١ - ا س ح" },
+            { code: "2335", plate: "٣ ٦ ٦ ٨ - ا ص ب" },
+            { code: "6788", plate: "٣ ٧ ٢ ٩ - ب ط ص" },
+            { code: "1974", plate: "٦ ٨ ٣ ٥ - ا س ك" },
+            { code: "5899", plate: "٩٨٤٩ - ر ب ك" },
+            { code: "2923", plate: "١٤١٥ - ب ن س" },
+            { code: "9348", plate: "٣٧٦١ - ب ص ن" },
+            { code: "4950", plate: "٣٨٦٦ - ب ص ن" },
+            { code: "9639", plate: "٤٧٠٨ - ب ص ن" },
+            { code: "2329", plate: "٤٧٣٩ - ب ص ع" },
+            { code: "3483", plate: "٥٩٣٣ - ب ص ك" },
+            { code: "6534", plate: "٦٣٠٤ - ب ص ب" },
+            { code: "4771", plate: "٦٢٢٥ - ب ص ك" },
+            { code: "2666", plate: "٩٧٣٢ - ب ط س" },
+            { code: "9135", plate: "٩٧٣٥ - ب ط س" },
+            { code: "9549", plate: "٩٧٣٨ - ب ط س" },
+            { code: "6671", plate: "٣٧٢٥ - ب ط س" },
+            { code: "4140", plate: "٣٧٠٤ - ب ط ص" },
+            { code: "4271", plate: "٣٧٤٨ - ب ط ص" },
+            { code: "8017", plate: "٣٧٤٩ - ب ط ص" },
+            { code: "5369", plate: "-" },
+            { code: "9983", plate: "-" },
+            { code: "6102", plate: "٩٠٦٠ - ب ط ق" },
+            { code: "7000", plate: "٩٤١٢ - ب ط ق" },
+            { code: "9085", plate: "٤٥٣٨ - ا س و" },
+            { code: "1250", plate: "٢٢٣٤ - ا س ا" },
+            { code: "7439", plate: "٨٤٢٢ - ب ص س" },
+            { code: "5224", plate: "٧٤٥٠ - ا س م" },
+            { code: "8407", plate: "-" },
+            { code: "9493", plate: "٣٠٤١ - ا س ح" },
+            { code: "4919", plate: "٢١٩٠ - ا س ا" },
+            { code: "5521", plate: "٩٤٣٦ - ا س و" },
+            { code: "3970", plate: "٣٦٢٢ - ب ص د" },
+            { code: "8785", plate: "٩٥٨٣ - ب ص ح" },
+            { code: "8443", plate: "٥٢٧٤ - ا س ب" },
+            { code: "6419", plate: "٧٢٦٦ - ا ص ا" },
+            { code: "2604", plate: "٣٦٦٨ - ا ص ب" },
+            { code: "2810", plate: "٣٤١٣ - أ س ح" },
+            { code: "9149", plate: "٥٢٨٨ - ا س ب" },
+            { code: "1123", plate: "٩ ١ ٨ ٥ - ا س ل" },
+            { code: "2057", plate: "٥٨٦٩ - ا س ك" },
+            { code: "7994", plate: "١٨٣٩ - ا ص د" },
+            { code: "7809", plate: "٨٢٨٦ - ب ص س" },
+            { code: "1197", plate: "٦٨٤١ - ا ا ب" },
+            { code: "9961", plate: "٩١٥١ - ا س ن" },
+            { code: "5060", plate: "٥٢٨٥ - ا س ب" },
+            { code: "2952", plate: "٥٢٨٥ - ا س ب" },
+            { code: "7260", plate: "٥٦٢٩ - ا س ل" },
+            { code: "5426", plate: "-" },
+            { code: "2547", plate: "٥ ٤ ١ ٨ - ا ص س" },
+            { code: "8472", plate: "٦ ٨ ٤ ٤ - ا ص ر" },
+            { code: "2851", plate: "٦٦٨٧ - ا ص ر" },
+            { code: "6149", plate: "٨٣٣٤ - ب ص س" },
+            { code: "4526", plate: "٨٨٣٧ - ب س ن" },
+            { code: "7061", plate: "٦٨٤٢ - ا س ب" },
+            { code: "2073", plate: "٩٧٠٢ - ا ص ا" },
+            { code: "9849", plate: "٢ ٧ ٣ ٦ - ا س و" },
+            { code: "3286", plate: "٣٢١١ - ا س ع" },
+            { code: "6946", plate: "٢٥٨١ - ا ص ط" },
+            { code: "5477", plate: "٥٢٩٦ - ا ص ق" },
+            { code: "8406", plate: "٢٠٠٨ - ا ص ر" },
+            { code: "7147", plate: "٢٠٠٩ - ا ص ر" },
+            { code: "8110", plate: "٢٠١٠ - ا ص ر" },
+            { code: "3089", plate: "-" },
+            { code: "7314", plate: "-" },
+            { code: "4105", plate: "-" },
+            { code: "5887", plate: "٤١٥٢ - ا ص ب" },
+            { code: "6280", plate: "٤ ١ ٥ ٦ - ا ص ب" },
+            { code: "4691", plate: "٢٠٢٥ - ا ص ر" },
+            { code: "2678", plate: "-" },
+            { code: "5441", plate: "٦٥٠٣ - ا ص ر" },
+            { code: "2480", plate: "٢٠٠٥ - ا ص ر" },
+            { code: "4633", plate: "٢٠٣٧ - ا ص ر" },
+            { code: "7125", plate: "٢٠٣٨ - ا ص ر" },
+            { code: "2245", plate: "٢٠٤٥ - ا ص ر" },
+            { code: "3243", plate: "٧٣٩٧ - ا س ى" },
+            { code: "3956", plate: "٢ ٩ ٠ ٥ - ب ع ق" },
+            { code: "5707", plate: "١٣٦٣ - ا ص ب" },
+            { code: "9522", plate: "٥ ٦ ٩ ٩ - ا ا ا" },
+            { code: "3720", plate: "٧ ٢ ٠ ٨ - ا د و" },
+            { code: "8522", plate: "٢٠٧٧ - ا ص ر" },
+            { code: "2622", plate: "٩١٨٩ - ا س ل" },
+            { code: "8020", plate: "٦٩٤١ - ا ص ر" },
+            { code: "8178", plate: "٩ ٧ ٢ ٥ - ب ط س" },
+            { code: "2221", plate: "-" },
+            { code: "6107", plate: "٢ ٠ ٥ ٥ - ا ص ر" },
+            { code: "1441", plate: "٣ ٠ ٨ ٠ - ا ط ب" },
+            { code: "3313", plate: "٦ ٨ ٣ ٧ - ا ص ى" },
+            { code: "4968", plate: "٦ ٤ ٩ ٧ - ب ر ى" },
+            { code: "5607", plate: "٦ ٦ ٤ ٩ - ب ق ق" },
+            { code: "6123", plate: "٤ ٠ ٠ ٦ - ا ص ه" },
+            { code: "4011", plate: "٦ ٨ ٧ ٣ - ا ص ى" },
+            { code: "8016", plate: "٩٤١٢ - ب ط ق" },
+            { code: "8281", plate: "١٠١٥ - ب ط ع" },
+            { code: "8043", plate: "٩٤٠٧ - ب ط ق" },
+            { code: "2341", plate: "٩٠٧٠ - ب س م" },
+            { code: "8323", plate: "٦٤٩٧ - ب ر ى" },
+            { code: "9111", plate: "٢٠٢٥ - ا ص ر" },
+            { code: "7013", plate: "٢ ٠ ٣ ٨ - ا ص ر" },
+            { code: "3430", plate: "٦ ٩ ٥ ٨ - ب ق ن" },
+            { code: "8656", plate: "٧ ٥ ٩ ٩ - ر ط ح" },
+            { code: "7159", plate: "٦ ٠ ١ ١ - د د ر" },
+            { code: "7820", plate: "٨ ٢ ٣ ٦ - ا" },
+            { code: "1258", plate: "٦ ٧ ٨ ١ - ب ق ن" },
+            { code: "8158", plate: "٢ ٢ ٣ ٤ - ا س ا" },
+            { code: "1591", plate: "٩ ٠ ٤ ٢ - ب س م" },
+            { code: "2820", plate: "٦ ٦ ١ ٩ - ب ق ن" },
+            { code: "6846", plate: "٦ ٧ ٧ ٩ - ب ق ن" },
+            { code: "8744", plate: "٧ ٣ ٦ ٥ - ا س ل" },
+            { code: "7930", plate: "٥٩٧٢ - د ك ط" },
+            { code: "9613", plate: "٥٤٥٨ - د ع ح" },
+            { code: "6152", plate: "٤٥٨٨ - د ب ع" },
+            { code: "5382", plate: "٥٦٥٧ - د ص ط" },
+            { code: "1768", plate: "١٠٩٨ - د ص ط" },
+            { code: "1803", plate: "١٧١٢ - د ر ع" },
+            { code: "2018", plate: "٦٦٥٧ - ب ص ب" },
+            { code: "8545", plate: "١٤٠٨ - ب س ن" },
+            { code: "1131", plate: "١٤١٠ - ب س ن" },
+            { code: "1011", plate: "٣٩٣٧ - ب ص ن" },
+            { code: "4587", plate: "٣٩٤٠ - ب ص ن" },
+            { code: "0548", plate: "٣٩٤١ - ب ص ن" },
+            { code: "7007", plate: "٣٩٣٨ - ب ص ن" },
+            { code: "5249", plate: "٥٨٣٣ - ب ص ن" },
+            { code: "7375", plate: "٣٩٤٣ - ب ص ن" },
+            { code: "2030", plate: "٥ ٨ ٣ ٧ - ب ص ن" },
+            { code: "8640", plate: "٥٨٣٦ - ب ص ن" },
+            { code: "5866", plate: "٥٩٤٦ - ب ص م" },
+            { code: "3471", plate: "٥٩٠٤ - ب ص ك" },
+            { code: "7444", plate: "٤٧١٠ - ب ص ع" },
+            { code: "2959", plate: "٥٦٨٣ - ب ص ك" },
+            { code: "7927", plate: "٤٧٠٥ - ب ص ع" },
+            { code: "5780", plate: "٤٧٤٠ - ب ص ع" },
+            { code: "6415", plate: "٤٧٠٤ - ب ص ع" },
+            { code: "4431", plate: "٤٧٩٧ - ب ص ع" },
+            { code: "8378", plate: "٤٧٣٤ - ب ص ع" },
+            { code: "6736", plate: "٤٧٠٦ - ب ص ع" },
+            { code: "7380", plate: "٤٧٣٥ - ب ص ع" },
+            { code: "0195", plate: "٤٧٠٩ - ب ص ع" },
+            { code: "7118", plate: "٤٧٠٢ - ب ص ع" },
+            { code: "6005", plate: "٤٧١٠ - ب ص ط" },
+            { code: "5857", plate: "٢٢٢٠ - أ س أ" },
+            { code: "9023", plate: "٤٧١٥ - ب ص ط" },
+            { code: "2852", plate: "٢٢٨٩ - ب س ن" },
+            { code: "6846", plate: "٢٢٧٦ - ب س ن" },
+            { code: "4223", plate: "٩٥١٩ - ب س ل" },
+            { code: "4537", plate: "٩٤٧٣ - ب س ل" },
+            { code: "6528", plate: "-" },
+            { code: "3043", plate: "٩ ٧ ٣ ٣ - ب ط س" },
+            { code: "9739", plate: "٩٧٣٦ - ب ط س" },
+            { code: "6330", plate: "٩ ٧ ١ ٠ - ب ط س" },
+            { code: "1531", plate: "٩٧٣٤ - ب ط س" },
+            { code: "2678", plate: "٣٧٠٣ - ب ط ص" },
+            { code: "9448", plate: "٣٧٠٥ - ب ط ص" },
+            { code: "2431", plate: "٩ ٧ ٤ ٤ - ب ط س" },
+            { code: "3434", plate: "٩ ٧ ٠ ٦ - ب ط س" },
+            { code: "1550", plate: "٩٧٠١ - ب ط س" },
+            { code: "7837", plate: "٣٧٢٢ - ب ط ص" },
+            { code: "9317", plate: "٣٧٤٤ - ب ط ص" },
+            { code: "9995", plate: "٩٤٦٩ - ب س ل" },
+            { code: "8772", plate: "٣٧٤٦ - ب ط ص" },
+            { code: "8420", plate: "-" },
+            { code: "9413", plate: "٣٧٤٠ - ب ط ص" },
+            { code: "1590", plate: "٣٧٢٦ - ب ط ص" },
+            { code: "6062", plate: "٩٧٢٣ - ب ط س" },
+            { code: "1482", plate: "٩٧٢٠ - ب ط س" },
+            { code: "3641", plate: "-" },
+            { code: "4400", plate: "٣ ٧ ٠ ٩ - ب ط ص" },
+            { code: "6783", plate: "٣ ٧ ٠ ٧ - ب ط ص" },
+            { code: "1837", plate: "٩٧٤٦ - ب ط ص" },
+            { code: "4732", plate: "٩٧٢٩ - ب ط س" },
+            { code: "3573", plate: "٩٧٢٢ - ب ط س" },
+            { code: "4595", plate: "٣ ٧ ٥ ٠ - ب ط ص" },
+            { code: "9868", plate: "١ ٩ ٤ ٩ - ب ط ع" },
+            { code: "2357", plate: "٩ ٨ ٨ ٣ - ب ط ق" },
+            { code: "3169", plate: "٩٤٢٢ - ب ط ق" },
+            { code: "4327", plate: "٩ ٠ ٦ ٤ - ب ط ق" },
+            { code: "9572", plate: "١٤٧٤ - ب ط ع" },
+            { code: "6086", plate: "-" },
+            { code: "1075", plate: "١٤٨٩ - ب ط ع" },
+            { code: "6236", plate: "١ ٤ ٧ ٩ - ب ط ع" },
+            { code: "4427", plate: "١٤٦٦ - ب ط ع" },
+            { code: "6513", plate: "١ ٤ ٦ ٧ - ب ط ع" },
+            { code: "9968", plate: "٩٠٧٩ - ب ط ق" },
+            { code: "4154", plate: "٩٤٢٦ - ب ط ق" },
+            { code: "3594", plate: "٩ ٤ ٠ ٢ - ب ط ق" },
+            { code: "8921", plate: "٩٤٢٣ - ب ط ق" },
+            { code: "6196", plate: "١ ٤ ٧ ٢ - ب ط ع" },
+            { code: "9496", plate: "-" },
+            { code: "6450", plate: "٩٩٧١ - ب س ل" },
+            { code: "4961", plate: "٦٢٢٩ - ب ص ب" },
+            { code: "7593", plate: "٥٣٢٦ - ا ص ا" },
+            { code: "9788", plate: "٨٣٤٧ - ب ص س" },
+            { code: "7646", plate: "٢١٦٩ - ا س ا" },
+            { code: "8409", plate: "٨ ٢ ٧ ٨ - ب ص س" },
+            { code: "9998", plate: "٤٤٥٤ - ب ص ب" },
+            { code: "1988", plate: "٦٢١٤ - ب ص ب" },
+            { code: "9421", plate: "٨٠٦٠ - ب ص س" },
+            { code: "9466", plate: "٩٩٤٨ - ب س ل" },
+            { code: "2795", plate: "١١٣٠ - ب ط م" },
+            { code: "3259", plate: "٣٩٢٧ - ب ص د" },
+            { code: "8744", plate: "٦٣٠٢ - ب ص ب" },
+            { code: "4978", plate: "٧٢٧٦ - ا ص ب" },
+            { code: "2482", plate: "-" },
+            { code: "5179", plate: "٩٤٣٣ - ا س و" },
+            { code: "2726", plate: "٦ ٩ ٤ ٨ - ا س ل" },
+            { code: "5520", plate: "٢٢٤٦ - ا س ا" },
+            { code: "2568", plate: "٥٢٧٩ - ا س ب" },
+            { code: "9212", plate: "٦٢٤٤ - ب ص ب" },
+            { code: "7414", plate: "٥٢٨٧ - ا س ب" },
+            { code: "4639", plate: "٨٩٩٨ - ب س ن" },
+            { code: "5934", plate: "٢٠٨٨ - ا س ا" },
+            { code: "1653", plate: "٣٠٤٦ - ا س ح" },
+            { code: "7471", plate: "٢١٦١ - ا س ا" },
+            { code: "4219", plate: "٦٠٩٩ - ب ص ب" },
+            { code: "1686", plate: "٦٠٩٢ - ب ص ب" },
+            { code: "5340", plate: "-" },
+            { code: "9852", plate: "٩٧٣٧ - ب ط س" },
+            { code: "9163", plate: "٣٠٣٥ - ا س ح" },
+            { code: "5865", plate: "٢٢٢٥ - ا س ا" },
+            { code: "2066", plate: "٧٦٧٦ - ا س د" },
+            { code: "7237", plate: "٨٠٥٩ - ب ص س" },
+            { code: "6199", plate: "١٤٦٨ - ا ص ح" },
+            { code: "6711", plate: "١٤٦٥ - ا ص ح" },
+            { code: "7192", plate: "١ ٤ ٥ ٣ - ا ص ح" },
+            { code: "1100", plate: "٥١٨٧ - ا ص ر" },
+            { code: "8408", plate: "٩٧٠٠ - ب ص ح" },
+            { code: "2185", plate: "٦٠٢٠ - ا ص ر" },
+            { code: "4230", plate: "٥٦٩٢ - ا س ك" },
+            { code: "9854", plate: "٩ ٤ ٢ ٨ - ا ص س" },
+            { code: "7904", plate: "٢١٨٧ - ا س ا" },
+            { code: "4101", plate: "٦٨٣٨ - ا ص ر" },
+            { code: "4166", plate: "٦٨٨٦ - ب س ل" },
+            { code: "4784", plate: "-" },
+            { code: "8649", plate: "٢٢٦٨ - ب س ن" },
+            { code: "3143", plate: "٥٤٠٤ - ا ص ص" },
+            { code: "1804", plate: "٥٥٣٢ - ا ص ص" },
+            { code: "2839", plate: "٧٩٠٢ - ا ص ا" },
+            { code: "7615", plate: "٣٠١٢ - ا س ح" },
+            { code: "5680", plate: "٤ ١ ١ ٧ - ا ص ب" },
+            { code: "4443", plate: "١٢٣٤ - ه ك" },
+            { code: "8688", plate: "٦ ٩ ٦ ١ - ب ق ن" },
+            { code: "2992", plate: "٢٠١١ - ا ص ر" },
+            { code: "2660", plate: "٤ ١ ٥ ٠ - ا ص ب" },
+            { code: "6300", plate: "٢٠٢٨ - ا ص ر" },
+            { code: "5496", plate: "٨٨٤٠ - ا س ك" },
+            { code: "2037", plate: "٢٠٩٥ - ا ص ر" },
+            { code: "7755", plate: "٢٠٥٠ - ا ص ر" },
+            { code: "3054", plate: "٢٠٤٢ - ا ص ر" },
+            { code: "6999", plate: "٢٠٧٢ - ا ص ر" },
+            { code: "1152", plate: "٢٠٧٣ - ا ص ر" },
+            { code: "6391", plate: "٢٠٦٩ - ا ص ر" },
+            { code: "2190", plate: "-" },
+            { code: "1075", plate: "٩ ٨ ٨ ١ - ب ط ق" },
+            { code: "3653", plate: "٨٥٤٩ - ب س ر" },
+            { code: "6386", plate: "-" },
+            { code: "6315", plate: "٢١٧١ - ب س ل" },
+            { code: "5692", plate: "٩٠٧٦ - ب س م" },
+            { code: "6115", plate: "٤ ٨ ٨ ٤ - ا ر ع" },
+            { code: "9060", plate: "٦٦٦٦ - ا ا ا" },
+            { code: "2192", plate: "٢٠٣٤ - ا ص ر" },
+            { code: "2537", plate: "٧٩١٥ - ا ص ن" },
+            { code: "5184", plate: "٢٢٣٦ - ب د ا" },
+            { code: "9162", plate: "٤٠٤٦ - ا ص ه" },
+            { code: "9307", plate: "٩٤١٣ - ب ط ق" },
+            { code: "3319", plate: "٦٥٠٠ - ب ر ى" },
+            { code: "2346", plate: "٩١١٠ - ب س م" },
+            { code: "9793", plate: "٩٠٦٣ - ب س م" },
+            { code: "9144", plate: "٧٩٢٦ - ب ر و" },
+            { code: "8170", plate: "٦٤٨٢ - ب ر ى" },
+            { code: "7076", plate: "٦٤٩٤ - ب ر ى" },
+            { code: "6658", plate: "٤٧٩٠ - ا ص ه" },
+            { code: "1829", plate: "٤٧٩٣ - ا ص ه" },
+            { code: "7338", plate: "٤٨١٩ - ا ص ه" },
+            { code: "3633", plate: "٦ ٦ ٩ ٧ - ا د ك" },
+            { code: "4160", plate: "٤٥٨١ - ا ص ك" },
+            { code: "3633", plate: "٤٨٥١ - ا ص ك" },
+            { code: "3080", plate: "٦ ٨ ٠ ٦ - ا ص ى" },
+            { code: "3650", plate: "٦٨٠٧ - ا ص ى" },
+            { code: "8847", plate: "٦ ٨ ٠ ٩ - ا ص ى" },
+            { code: "3094", plate: "٦ ٨ ١ ٢ - ا ص ى" },
+            { code: "6472", plate: "٢ ٢ ٩ ٠ - ب س ن" },
+            { code: "7210", plate: "٥٩٠٧ - ب س ط" },
+            { code: "9393", plate: "٤ ٠ ٦ ٤ - ا ص ه" },
+            { code: "1807", plate: "١٥٦٢ - ب س ط" },
+            { code: "5602", plate: "٦٤٩٦ - ب ر ى" },
+            { code: "6698", plate: "٨٥٥٥ - ب س ر" },
+            { code: "8596", plate: "٦٤٧٩ - ب ر ى" },
+            { code: "6757", plate: "٦٤٩٥ - ب ر ى" },
+            { code: "7773", plate: "٤ ٣ ٩ ٨ - ب س ع" },
+            { code: "2545", plate: "٨ ٥ ٧ ٠ - ب س ر" },
+            { code: "4024", plate: "٦ ٤ ٧ ٧ - ب ر ى" },
+            { code: "2111", plate: "١ ٣ ٨ ٩ - ب ص ب" },
+            { code: "7808", plate: "٨ ٥ ٥ ٤ - ب س ر" },
+            { code: "3448", plate: "٦ ٤ ٧ ٥ - ب ر ى" },
+            { code: "2162", plate: "٤ ٢ ٥ ٩ - ب ر و" },
+            { code: "1933", plate: "٤ ٧ ٩ ٧ - ب ص ك" },
+            { code: "1764", plate: "٤٨٢٦ - ا ص ه ـ" },
+            { code: "5385", plate: "٤ ٢ ٦ ١ - ب ر و" },
+            { code: "5737", plate: "٨ ٥ ٦ ٤ - ب س ر" },
+            { code: "5555", plate: "٣ ٥ ٣ ٤ - ب ص ح" },
+            { code: "7021", plate: "٨ ٦ ٨ ٢ - ب س د" },
+            { code: "8428", plate: "٤ ٨ ٠ ٢ - ا ص ه" },
+            { code: "4676", plate: "٣ ٠ ٩ ٨ - ا ط ب" },
+            { code: "9077", plate: "٣ ٠ ٩ ٠ - ا ط ب" },
+            { code: "9763", plate: "٣ ٠ ٨ ٢ - ا ط ب" },
+            { code: "5909", plate: "٣ ٠ ٨ ٩ - ا ط ب" },
+            { code: "5113", plate: "٦ ٦ ٤ ٦ - ب ق ق" },
+            { code: "6734", plate: "٦ ٦ ٣ ١ - ب ق ق" },
+            { code: "7313", plate: "٤ ٨ ١ ٢ - ا ص ه" },
+            { code: "4076", plate: "٤٨٢١ - ا ص ه ـ" },
+            { code: "9166", plate: "٣٠٨٥ - ا ط ب" },
+            { code: "4899", plate: "٦ ٨ ٠ ١ - ا ص ى" },
+            { code: "9625", plate: "٦٨٤٥ - ا ص ى" },
+            { code: "3372", plate: "٦ ٨ ٤ ٦ - ا ص ى" },
+            { code: "9610", plate: "٦ ٨ ٦ ٥ - ا ص ى" },
+            { code: "7208", plate: "٦ ٨ ٦ ٧ - ا ص ى" },
+            { code: "4287", plate: "٦ ٨ ٣ ٣ - ا ص ى" },
+            { code: "6247", plate: "-" },
+            { code: "6855", plate: "٤ ٠ ٠ ٧ - ا ص ه" },
+            { code: "1234", plate: "٨ ٥ ٥ ١ - ب س ر" },
+            { code: "2990", plate: "٦ ٤ ٨ ٠ - ب ر ى" },
+            { code: "7573", plate: "٨ ٥ ٥ ٨ - ب س ر" },
+            { code: "3848", plate: "٨٢٤٤ - ا ط س" },
+            { code: "1964", plate: "٨٢٤١ - ا ط س" },
+            { code: "7286", plate: "٤ ٨ ٧ ٩ - ا ط س" },
+            { code: "9152", plate: "٨٢٤٢ - ا ط س" },
+            { code: "3187", plate: "٧ ٧ ٣ ١ - ا ط س" },
+            { code: "2313", plate: "٦ ٩ ٦ ٣ - ب ق ن" },
+            { code: "2875", plate: "٦٩٥٢ - ب ق ن" },
+            { code: "3116", plate: "٦ ٩ ٦ ٧ - ب ق ن" },
+            { code: "5712", plate: "٦ ٩ ٦ ١ - ب ق ن" },
+            { code: "6543", plate: "٧ ٥ ٣ ٠ - ا ط ب" },
+            { code: "1588", plate: "٧٥٣٢ - ا ط ب" },
+            { code: "9622", plate: "٣٧٤٤ - ب ط ص" },
+            { code: "6298", plate: "٧٩٦٨ - ا ط س" },
+            { code: "8117", plate: "٨٥٥٤ - ا س ر" },
+            { code: "7168", plate: "١ ٣ ٦ ٩ - ب ص ب" },
+            { code: "8052", plate: "٦٩٠٣ - ب ق ن" },
+            { code: "4763", plate: "٦ ٨ ٦ ٠ - ا ص ى" },
+            { code: "7153", plate: "٦٩٥١ - ب ق ن" },
+            { code: "6518", plate: "٦٧٠٣ - ب ق ن" },
+            { code: "1268", plate: "٦ ٩ ٤ ٧ - ب ق ن" },
+            { code: "8369", plate: "٦ ٩ ٣ ٨ - ب ق ن" },
+            { code: "4137", plate: "٧ ٥ ٣ ٨ - ا ط ب" },
+            { code: "5454", plate: "٦ ٨ ٠ ٣ - ا ص ى" },
+            { code: "3805", plate: "٦ ٩ ٦ ٨ - ب ق ن" },
+            { code: "5227", plate: "٦ ٨ ١ ٨ - ا ص ى" },
+            { code: "7455", plate: "٦ ٨ ٢ ٢ - ا ص ى" },
+            { code: "9403", plate: "٦ ٨ ٣ ٤ - ا ص ى" },
+            { code: "5348", plate: "٦ ٩ ٤ ٣ - ب ق ن" },
+            { code: "6049", plate: "٣٤٥٥ - ا ط ح" },
+            { code: "7984", plate: "٦٨٠٨ - ا ص ى" },
+            { code: "7284", plate: "٦٨٠٤ - ا ص ى" },
+            { code: "8926", plate: "٨ ١ ٩ ٥ - ا ص ن" },
+            { code: "6080", plate: "٩ ٨ ٩ ٠ - ب ط ق" },
+            { code: "7875", plate: "-" },
+            { code: "8108", plate: "١ ٠ ٠ ٦ - ح" },
+            { code: "4292", plate: "١ ٠ ١ ٦ - ح" },
+            { code: "6232", plate: "1480 ETB" },
+            { code: "6428", plate: "٣ ٠ ٩ ٦ - ا ط ب" },
+            { code: "5598", plate: "6817 VXA" },
+            { code: "4612", plate: "١ ٠ ٠ ٠ - ك" },
+            { code: "5424", plate: "6832 VXA" },
+            { code: "5710", plate: "4884 ERA" },
+            { code: "7926", plate: "8198 NXA" },
+            { code: "1897", plate: "٧ ٩ ٦ ٩ - ا ط س" },
+            { code: "9159", plate: "٦ ٩ ٨ ٢ - ب ق ن" },
+            { code: "4895", plate: "٦ ٩ ٤ ٩ - ب ق ن" },
+            { code: "5964", plate: "٦ ٩ ٥ ٧ - ب ق ن" },
+            { code: "5142", plate: "٦ ٧ ٠ ٢ - ب ق ن" },
+            { code: "2489", plate: "-" },
+            { code: "7637", plate: "٣ ٧ ٤ ١ - ب ط ص" },
+            { code: "7781", plate: "4005 HXA" },
+            { code: "1975", plate: "٦ ٧ ٠ ٦ - ب ق ن" },
+            { code: "1058", plate: "8181 NXA" },
+            { code: "9534", plate: "9398 LEB" },
+            { code: "7818", plate: "9609 SGB" },
+            { code: "6708", plate: "9395 LEB" },
+            { code: "3288", plate: "5014 AGB" },
+            { code: "3102", plate: "٥ ٤ ٧ ٤ - د ط أ" },
+            { code: "3385", plate: "٤ ٦ ٩ ٩ - د ك ك" },
+            { code: "2308", plate: "٦ ٩ ٣ ٩ - ب ص ك" },
+            { code: "5398", plate: "٦ ٩ ٤ ٢ - ب ص ك" },
+            { code: "3920", plate: "٤ ٧ ٥ ٨ - أ و م" },
+            { code: "7995", plate: "٤ ٧ ٣ ٨ - ب ص ع" },
+            { code: "5706", plate: "-" },
+            { code: "9052", plate: "٦ ١ ٢ ٦ - ب ص ك" },
+            { code: "9811", plate: "٦ ١ ٥ ٧ - ب ص ك" },
+            { code: "9191", plate: "٢ ٠ ٢ ٦ - أ س أ" },
+            { code: "2682", plate: "٢ ٠ ٢ ٧ - أ س أ" },
+            { code: "7249", plate: "٤ ٥ ٨ ٤ - ب ص ط" },
+            { code: "8631", plate: "٤ ٨ ٨ ١ - ب س ل" },
+            { code: "8815", plate: "٨ ١ ٣ ٢ - أ س ح" },
+            { code: "1104", plate: "٤ ٨ ٠ ٢ - ب س ل" },
+            { code: "9181", plate: "٨ ١ ٠ ٨ - د ب و" },
+            { code: "6646", plate: "١ ٤ ٥ ١ - د ص ط" },
+            { code: "8765", plate: "٧ ١ ٢ ٠ - د س ط" },
+            { code: "4680", plate: "٥ ١ ١ ٩ - د ك ك" },
+            { code: "4842", plate: "٤ ٥ ٨ ٧ - د ب ع" },
+            { code: "3982", plate: "٦ ٣ ١ ٩ - د ه س" },
+            { code: "2068", plate: "٧ ٢ ٤ ٩ - ب س ك" },
+            { code: "8136", plate: "٦ ٣ ٣ ٢ - ح ه ب" },
+            { code: "5978", plate: "٧ ٤ ٣ ٣ - ب ص ط" },
+            { code: "2461", plate: "٢ ٣ ٤ ٩ - أ س أ" },
+            { code: "4124", plate: "٤ ٥ ٧ ٠ - ب ص ط" },
+            { code: "3511", plate: "٨ ٤ ٥ ٨ - ب ص ن" },
+            { code: "4594", plate: "٣ ٧ ٢ ٨ - ب ط ص" },
+            { code: "8823", plate: "٣٧٢٠ - ب ط ص" },
+            { code: "9728", plate: "٩٧٤٨ - ب ط س" },
+            { code: "6119", plate: "٣ ٧ ١ ٩ - ب ط ص" },
+            { code: "6975", plate: "١ ٤ ٦ ٨ - ب ط ع" },
+            { code: "9291", plate: "٦ ٣ ٤ ٨ - ب ط ا" },
+            { code: "5918", plate: "٩ ٣ ٧ ٣ - ا ص ق" },
+            { code: "1133", plate: "٧ ٣ ٥ ٢ - ا س م" },
+            { code: "6493", plate: "-" },
+            { code: "4305", plate: "٥٥٠٩ - ا ص ا" },
+            { code: "7919", plate: "٨ ٠ ٥ ٧ - ب ص س" },
+            { code: "9063", plate: "٩ ٥ ٣ ٨ - ا س ى" },
+            { code: "3993", plate: "١٤٦٠ - ب ط ع" },
+            { code: "5922", plate: "٧ ٠ ٨ ٢ - ا ص ح" },
+            { code: "4807", plate: "٢ ٣ ٣ ٢ - ا ص ب" },
+            { code: "1349", plate: "٩ ٠ ٦ ٧ - ا ر ح" },
+            { code: "2804", plate: "٦ ٤ ٧ ٠ - ب ص ب" },
+            { code: "8631", plate: "٦ ٧ ٤ ٤ - ا س ع" },
+            { code: "8709", plate: "٨ ٠ ٦ ٣ - ب ص س" },
+            { code: "3486", plate: "٨ ٣ ٢ ٣ - ب ص س" },
+            { code: "8763", plate: "٦ ٤ ٦ ٩ - ب ص ب" },
+            { code: "6187", plate: "٦ ٧ ٨ ٠ - ا س ل" },
+            { code: "5379", plate: "٨ ٠ ٧ ٦ - ب ص س" },
+            { code: "4169", plate: "١ ٨ ٠ ٧ - ا ص د" },
+            { code: "3002", plate: "٨ ٣ ١ ١ - ا ص ط" },
+            { code: "8908", plate: "١ ٩ ١ ٢ - ا ص د" },
+            { code: "4855", plate: "٢ ٠ ٦ ٣ - ا ص ط" },
+            { code: "9711", plate: "١ ٨ ٠ ٤ - ا ص د" },
+            { code: "5410", plate: "٩ ٥ ٧ ٦ - ب ص ح" },
+            { code: "1290", plate: "٦ ٥ ٧ ٣ - ا س ل" },
+            { code: "8020", plate: "١ ٤ ٦ ٠ - ا ص ح" },
+            { code: "1652", plate: "٧ ٩ ٢ ٢ - ا ص ق" },
+            { code: "5881", plate: "٩ ٥ ٥ ٨ - ا س ى" },
+            { code: "8833", plate: "٩ ٥ ٥ ١ - ا س ى" },
+            { code: "5114", plate: "-" },
+            { code: "4899", plate: "٦ ٢ ٣ ٣ - ا ص ر" },
+            { code: "6723", plate: "٨ ٨ ١ ٢ - ا س و" },
+            { code: "3233", plate: "٩ ٦ ١ ١ - ا س ع" },
+            { code: "3406", plate: "-" },
+            { code: "7922", plate: "١ ٨ ٣ ٦ - ا ص د" },
+            { code: "2073", plate: "١ ٨ ٠ ١ - ا ص د" },
+            { code: "8800", plate: "٧ ٠ ٨ ٦ - ا ص ح" },
+            { code: "1248", plate: "-" },
+            { code: "4026", plate: "٣ ٦ ٦ ٦ - ا س م" },
+            { code: "4323", plate: "٥ ٤ ١ ٦ - ا ص ص" },
+            { code: "7957", plate: "٣ ٤ ٧ ٥ - ا ص ص" },
+            { code: "3409", plate: "٢ ٠ ٧ ٣ - ا ص ط" },
+            { code: "1507", plate: "١ ٠ ١ ٢ - ب س ا" },
+            { code: "8695", plate: "٦ ٢ ٧ ٠ - ا ص ا" },
+            { code: "5470", plate: "٦ ٩ ٠ ٢ - ر م ه" },
+            { code: "5190", plate: "٢ ٠ ٠ ٤ - ا ص ر" },
+            { code: "1443", plate: "٤ ٨ ٨ ٥ - ا ص ط" },
+            { code: "9319", plate: "٧ ٣ ٦ ١ - ا ص ب" },
+            { code: "9980", plate: "٢٠٥٣ - ا ص ر" },
+            { code: "3379", plate: "١ ١ ٥ ٥ - ا ص ص" },
+            { code: "1645", plate: "-" },
+            { code: "4191", plate: "-" },
+            { code: "8387", plate: "-" },
+            { code: "1285", plate: "٢ ٩ ٠ ٩ - ب ع ق" },
+            { code: "2269", plate: "-" },
+            { code: "6872", plate: "-" },
+            { code: "3021", plate: "٢ ٠ ٧ ٢ - ا ص ط" },
+            { code: "4089", plate: "٢ ٨ ٩ ٨ - ب ع ق" },
+            { code: "5485", plate: "٩ ٣ ٧ ٤ - ب ع ل" },
+            { code: "4226", plate: "٤ ٧ ٣ ٧ - ب ع س" },
+            { code: "7914", plate: "٤ ٧ ٣ ٢ - ب ع س" },
+            { code: "4767", plate: "٩ ٣ ٧ ٩ - ب ع ل" },
+            { code: "8723", plate: "٩ ٣ ٦ ٨ - ب ع ل" },
+            { code: "1707", plate: "٥ ٤ ١ ٨ - ا ص س" },
+            { code: "3366", plate: "٢ ٧ ٣ ٦ - ا س و" },
+            { code: "5724", plate: "٩ ٣ ٦ ٩ - ب ع ل" },
+            { code: "9171", plate: "-" },
+            { code: "1553", plate: "٥ ٢ ٠ ٣ - ب ق ا" },
+            { code: "3051", plate: "٥ ٠ ١ ٠ - ب ق ا" },
+            { code: "8286", plate: "٩ ٣ ٦ ١ - ب ع ل" },
+            { code: "6984", plate: "٩ ٣ ٥ ٣ - ب ع ل" },
+            { code: "1544", plate: "Z043" },
+            { code: "9919", plate: "Z087" },
+            { code: "6163", plate: "٢ ٠ ٧ ١ - ا ص ط" },
+            { code: "4656", plate: "٨ ٥ ٧ ٢ - ا ص س" },
+            { code: "8614", plate: "٦ ٦ ٤ ١ - ب ق ق" },
+            { code: "4298", plate: "٦ ٦ ٤ ٣ - ب ق ق" },
+            { code: "4784", plate: "٧ ٧ ٣ ٢ - ا ط س" },
+            { code: "8306", plate: "٣ ٣ ٤ ٩ - ا ص ى" },
+            { code: "7729", plate: "٤ ١ ٩ ٠ - ا ص ه" },
+            { code: "4681", plate: "٤ ٣ ٦ ٤ - ا ص ه" },
+            { code: "9136", plate: "٦ ٩ ٤ ٩ - ب ق ن" },
+            { code: "9646", plate: "٤ ١ ٨ ٧ - ا ص ه" },
+            { code: "3293", plate: "١ ٠ ١ ٨ - ح" },
+            { code: "8451", plate: "١ ٠ ٢ ٠ - ح" },
+            { code: "1400", plate: "٩ ٣ ٧ ٤ - ب ع ل" },
+            { code: "8717", plate: "٩ ٣ ٧ ٩ - ب ع ل" },
+            { code: "6428", plate: "٤ ٢ ٠ ٧ - ا ص ه" },
+            { code: "3341", plate: "-" },
+            { code: "7645", plate: "٣ ٩ ٥ ٦ - ب ص ح" },
+            { code: "6873", plate: "6899 VXA" },
+            { code: "2455", plate: "6895 VXA" },
+            { code: "5768", plate: "3712 XTB" },
+            { code: "8851", plate: "M-1000" },
+            { code: "2213", plate: "9602 SGB" },
+            { code: "9890", plate: "6031 SSA" },
+            { code: "5038", plate: "3613 UEB" },
+            { code: "1965", plate: "9613 SGB" },
+            { code: "1178", plate: "5201 AGB" },
+            { code: "3438", plate: "5012 AGB" }
+        ];
 
-        // Firebase Configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyAtvZC_Ztg8lVbOUaMl8f268RBnskq3qM0",
-            authDomain: "zah123-cd263.firebaseapp.com",
-            projectId: "zah123-cd263",
-            storageBucket: "zah123-cd263.firebasestorage.app",
-            messagingSenderId: "978446441946",
-            appId: "1:978446441946:web:d3a1183239d86c81ecf4e3",
-            databaseURL: "https://zah123-cd263-default-rtdb.firebaseio.com/"
+        // ==================== LOCAL DATA STORAGE ====================
+        // استخدام التخزين المحلي بدلاً من Firebase
+        let localData = {
+            plates: {},
+            projects: {}
         };
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
+        // تحميل البيانات من localStorage
+        function loadLocalData() {
+            const saved = localStorage.getItem('zahrani_data');
+            if (saved) {
+                try {
+                    localData = JSON.parse(saved);
+                } catch (e) {
+                    console.error('Error loading data:', e);
+                }
+            } else {
+                // أول مرة - إضافة البيانات من ملف Excel
+                PLATES_DATA.forEach((item, index) => {
+                    if (item.plate && item.plate !== '-' && item.code) {
+                        localData.plates['plate_' + index] = {
+                            plate: item.plate,
+                            code: item.code,
+                            project: ''
+                        };
+                    }
+                });
+                saveLocalData();
+            }
+            updateStats();
+        }
 
-        // References
-        const platesRef = ref(database, 'plates');
-        const projectsRef = ref(database, 'projects');
+        // حفظ البيانات في localStorage
+        function saveLocalData() {
+            localStorage.setItem('zahrani_data', JSON.stringify(localData));
+            updateStats();
+        }
 
-        // State
-        let db = { projects: {}, plates: {} };
+        // ==================== STATE MANAGEMENT ====================
         let currentUser = null;
         let currentLang = 'ar';
-        let loadingTimeout;
         let deferredPrompt;
 
-        // Translations
+        // ==================== TRANSLATIONS ====================
         const translations = {
             ar: {
-                loading: "جاري الاتصال بالنظام...",
+                loading: "جاري تحميل البيانات...",
                 app_title: "نظام أكواد الشرائح",
                 app_subtitle: "مجموعة الزهراني",
-                search_title: "استعلام عن كود الشريحة",
-                search_desc: "أدخل رقم اللوحة للحصول على الكود الخاص بها",
-                search_plate_placeholder: "رقم اللوحة (مثال: أ ب ج 123 أو ABC123)",
-                search_code_placeholder: "كود الشريحة (مثال: 123456)",
                 search_plate_btn: "بحث عن الكود",
                 search_code_btn: "بحث عن اللوحة",
-                result_text: "نتيجة البحث",
-                no_result: "عذراً، البيانات غير موجودة في النظام",
-                admin_login_link: "دخول المدير",
-                admin_panel_title: "الدخول للوحة التحكم",
-                username: "اسم المستخدم",
-                password: "كلمة المرور",
-                username_placeholder: "أدخل اسم المستخدم",
-                password_placeholder: "أدخل كلمة المرور",
-                login_btn: "دخول",
-                back_btn: "رجوع",
-                login_error: "بيانات الدخول غير صحيحة",
-                admin_panel: "لوحة التحكم",
-                admin_name: "المدير: مهند",
-                logout: "خروج",
-                tab_plates: "اللوحات والأكواد",
-                tab_projects: "المشاريع",
-                add_plate_btn: "+ إضافة لوحة جديدة",
-                quick_search: "بحث سريع...",
-                add_project_btn: "+ إضافة مشروع جديد",
-                add_plate_title: "إضافة لوحة جديدة",
-                plate_label: "رقم اللوحة",
-                code_label: "كود الشريحة",
-                save_btn: "حفظ البيانات",
-                add_project_title: "إضافة مشروع جديد",
-                project_label: "اسم المشروع",
-                confirm_delete: "هل أنت متأكد من الحذف؟",
-                import_excel_title: "استيراد بيانات من Excel",
-                choose_file: "اختر ملف Excel",
-                import_excel: "استيراد Excel",
-                import_text: "استيراد نص",
-                import_success: "تم استيراد البيانات بنجاح!",
-                import_error: "حدث خطأ في قراءة الملف",
-                total_plates: "إجمالي اللوحات",
-                total_projects: "المشاريع",
-                search_by_plate: "بحث بلوحة",
-                search_by_code: "بحث بكود",
                 install_app: "تثبيت التطبيق",
-                app_installed: "تم تثبيت التطبيق بنجاح",
-                connection_error: "خطأ في الاتصال بالخادم، جاري إعادة المحاولة..."
+                app_installed: "تم تثبيت التطبيق بنجاح"
             },
             en: {
-                loading: "Connecting to system...",
+                loading: "Loading data...",
                 app_title: "Chip Codes System",
                 app_subtitle: "Al-Zahrani Group",
-                search_title: "Search Plate Code",
-                search_desc: "Enter plate number to get its code",
-                search_plate_placeholder: "Plate Number (e.g., ABC 123)",
-                search_code_placeholder: "Chip Code (e.g., 123456)",
                 search_plate_btn: "Search Code",
                 search_code_btn: "Search Plate",
-                result_text: "Search Result",
-                no_result: "Sorry, data not found in system",
-                admin_login_link: "Admin Login",
-                admin_panel_title: "Admin Login",
-                username: "Username",
-                password: "Password",
-                username_placeholder: "Enter username",
-                password_placeholder: "Enter password",
-                login_btn: "Login",
-                back_btn: "Back",
-                login_error: "Invalid Credentials",
-                admin_panel: "Admin Panel",
-                admin_name: "Admin: Mohanad",
-                logout: "Logout",
-                tab_plates: "Plates & Codes",
-                tab_projects: "Projects",
-                add_plate_btn: "+ Add New Plate",
-                quick_search: "Quick Search...",
-                add_project_btn: "+ Add New Project",
-                add_plate_title: "Add New Plate",
-                plate_label: "Plate Number",
-                code_label: "Chip Code",
-                save_btn: "Save Data",
-                add_project_title: "Add New Project",
-                project_label: "Project Name",
-                confirm_delete: "Are you sure you want to delete this?",
-                import_excel_title: "Import from Excel",
-                choose_file: "Choose Excel file",
-                import_excel: "Import Excel",
-                import_text: "Import Text",
-                import_success: "Data imported successfully!",
-                import_error: "Error processing file",
-                total_plates: "Total Plates",
-                total_projects: "Projects",
-                search_by_plate: "Search by Plate",
-                search_by_code: "Search by Code",
                 install_app: "Install App",
-                app_installed: "App installed successfully",
-                connection_error: "Connection error, retrying..."
+                app_installed: "App installed successfully"
             }
         };
 
-        // Toast Notification
+        // ==================== UTILITY FUNCTIONS ====================
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
             toast.textContent = message;
@@ -1363,73 +1765,12 @@
             document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
             document.documentElement.setAttribute('lang', currentLang);
             document.getElementById('lang-text').textContent = currentLang === 'ar' ? 'English' : 'عربي';
-
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (translations[currentLang][key]) {
-                    el.textContent = translations[currentLang][key];
-                }
-            });
-
-            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-                const key = el.getAttribute('data-i18n-placeholder');
-                if (translations[currentLang][key]) {
-                    el.placeholder = translations[currentLang][key];
-                }
-            });
         };
-
-        // Loading Timeout Handler
-        function handleLoadingTimeout() {
-            document.getElementById('loading-screen').classList.add('hidden');
-            showToast(translations[currentLang].connection_error, 'error');
-            showPublicScreen();
-        }
-
-        // Firebase Connection Check
-        function checkFirebaseConnection() {
-            const connectedRef = ref(database, '.info/connected');
-            onValue(connectedRef, (snap) => {
-                if (snap.val() === true) {
-                    clearTimeout(loadingTimeout);
-                    document.getElementById('loading-status').textContent = '✓ متصل';
-                } else {
-                    document.getElementById('loading-status').textContent = '✗ جاري إعادة الاتصال...';
-                }
-            });
-        }
-
-        // Data Sync
-        onValue(platesRef, (snapshot) => {
-            db.plates = snapshot.val() || {};
-            window.localDB = db;
-            updateStats();
-            if (currentUser && currentUser.type === 'admin') {
-                renderPlatesList();
-                updateProjectSelect();
-            }
-            clearTimeout(loadingTimeout);
-            document.getElementById('loading-screen').classList.add('hidden');
-            if (!currentUser) showPublicScreen();
-        }, (error) => {
-            console.error('Firebase Error:', error);
-            handleLoadingTimeout();
-        });
-
-        onValue(projectsRef, (snapshot) => {
-            db.projects = snapshot.val() || {};
-            window.localDB = db;
-            updateStats();
-            if (currentUser && currentUser.type === 'admin') {
-                renderProjectsList();
-                updateProjectSelect();
-            }
-        });
 
         // Update Statistics
         function updateStats() {
-            const platesCount = Object.keys(db.plates || {}).length;
-            const projectsCount = Object.keys(db.projects || {}).length;
+            const platesCount = Object.keys(localData.plates || {}).length;
+            const projectsCount = Object.keys(localData.projects || {}).length;
             
             document.getElementById('total-plates-count').textContent = platesCount;
             document.getElementById('total-projects-count').textContent = projectsCount;
@@ -1437,23 +1778,7 @@
             document.getElementById('admin-total-projects').textContent = projectsCount;
         }
 
-        // Update Project Select in Modal
-        function updateProjectSelect() {
-            const select = document.getElementById('new-plate-project');
-            if (!select) return;
-            
-            select.innerHTML = '<option value="">بدون مشروع</option>';
-            Object.values(db.projects || {}).forEach(project => {
-                if (project) {
-                    const option = document.createElement('option');
-                    option.value = project;
-                    option.textContent = project;
-                    select.appendChild(option);
-                }
-            });
-        }
-
-        // Plate Normalization (محسن)
+        // ==================== PLATE NORMALIZATION ====================
         const arabicToEnglishMap = {
             'أ': 'A', 'ا': 'A', 'إ': 'A', 'آ': 'A',
             'ب': 'B',
@@ -1480,7 +1805,7 @@
             
             // Replace Arabic digits
             const arabicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
-            s = s.replace(/[٠-٩]/g, w => arabicDigits.indexOf(w));
+            s = s.replace(/[٠-٩]/g, w => arabicDigits.indexOf(w).toString());
             
             s = s.toUpperCase();
             s = s.split('').map(char => arabicToEnglishMap[char] || char).join('');
@@ -1489,7 +1814,7 @@
             return s;
         };
 
-        // Search Functions
+        // ==================== SEARCH FUNCTIONS ====================
         window.switchSearchTab = function(tab) {
             document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
             event.target.classList.add('active');
@@ -1497,7 +1822,6 @@
             document.getElementById('search-plate-tab').classList.toggle('hidden', tab !== 'plate');
             document.getElementById('search-code-tab').classList.toggle('hidden', tab === 'plate');
             
-            // Hide results when switching tabs
             document.getElementById('search-result').classList.add('hidden');
             document.getElementById('search-error').classList.add('hidden');
         };
@@ -1510,18 +1834,25 @@
             const resCode = document.getElementById('res-code');
             const resPlate = document.getElementById('res-plate');
 
-            if (!query) return;
+            if (!query) {
+                showToast('الرجاء إدخال رقم اللوحة', 'warning');
+                return;
+            }
 
             const target = window.standardizePlate(query);
-            const records = Object.values(db.plates || {});
+            const records = Object.entries(localData.plates || {});
             
-            const found = records.find(p => p && p.plate && window.standardizePlate(p.plate) === target);
+            const found = records.find(([key, p]) => {
+                if (!p || !p.plate) return false;
+                return window.standardizePlate(p.plate) === target;
+            });
 
             if (found) {
+                const [key, data] = found;
                 resultBox.classList.remove('hidden');
                 errorBox.classList.add('hidden');
-                resCode.textContent = found.code;
-                resPlate.innerHTML = `<i class="fas fa-car"></i> ${found.plate} ${found.project ? '<br><small><i class="fas fa-folder"></i> ' + found.project + '</small>' : ''}`;
+                resCode.textContent = data.code;
+                resPlate.innerHTML = `<i class="fas fa-car"></i> ${data.plate}`;
             } else {
                 resultBox.classList.add('hidden');
                 errorBox.classList.remove('hidden');
@@ -1536,23 +1867,27 @@
             const resCode = document.getElementById('res-code');
             const resPlate = document.getElementById('res-plate');
 
-            if (!query) return;
+            if (!query) {
+                showToast('الرجاء إدخال الكود', 'warning');
+                return;
+            }
 
-            const records = Object.values(db.plates || {});
-            const found = records.find(p => p && p.code && p.code.trim() === query);
+            const records = Object.entries(localData.plates || {});
+            const found = records.find(([key, p]) => p && p.code && p.code.trim() === query);
 
             if (found) {
+                const [key, data] = found;
                 resultBox.classList.remove('hidden');
                 errorBox.classList.add('hidden');
-                resCode.textContent = found.code;
-                resPlate.innerHTML = `<i class="fas fa-car"></i> ${found.plate} ${found.project ? '<br><small><i class="fas fa-folder"></i> ' + found.project + '</small>' : ''}`;
+                resCode.textContent = data.code;
+                resPlate.innerHTML = `<i class="fas fa-car"></i> ${data.plate}`;
             } else {
                 resultBox.classList.add('hidden');
                 errorBox.classList.remove('hidden');
             }
         };
 
-        // Navigation
+        // ==================== NAVIGATION ====================
         window.showPublicScreen = function() {
             document.getElementById('loading-screen').classList.add('hidden');
             document.getElementById('login-screen').classList.add('hidden');
@@ -1566,16 +1901,14 @@
             document.getElementById('login-screen').classList.remove('hidden');
         };
 
-        // Auth
+        // ==================== AUTH ====================
         window.addEventListener('DOMContentLoaded', () => {
             applyLanguage();
-            checkFirebaseConnection();
-            loadingTimeout = setTimeout(handleLoadingTimeout, 10000);
-            
-            const session = sessionStorage.getItem('zahrani_session');
-            if (session) {
-                currentUser = JSON.parse(session);
-            }
+            loadLocalData();
+            setTimeout(() => {
+                document.getElementById('loading-screen').classList.add('hidden');
+                showPublicScreen();
+            }, 1000);
         });
 
         document.getElementById('login-form').addEventListener('submit', (e) => {
@@ -1588,7 +1921,7 @@
                 loginSuccess({ type: 'admin', name: 'مهند' });
             } else {
                 errorMsg.classList.remove('hidden');
-                showToast(translations[currentLang].login_error, 'error');
+                showToast('بيانات الدخول غير صحيحة', 'error');
             }
         });
 
@@ -1613,10 +1946,9 @@
             document.getElementById('admin-dashboard').classList.remove('hidden');
             renderPlatesList();
             renderProjectsList();
-            updateProjectSelect();
         }
 
-        // Admin Functions
+        // ==================== ADMIN FUNCTIONS ====================
         window.switchAdminTab = function(tab) {
             document.querySelectorAll('.admin-nav .nav-btn').forEach(t => t.classList.remove('active'));
             event.target.classList.add('active');
@@ -1630,14 +1962,13 @@
             const filter = document.getElementById('admin-search-plate')?.value.toLowerCase() || '';
             list.innerHTML = '';
 
-            Object.entries(db.plates || {}).forEach(([key, item]) => {
+            Object.entries(localData.plates || {}).forEach(([key, item]) => {
                 if (!item) return;
                 
                 const plate = String(item.plate || '');
                 const code = String(item.code || '');
-                const project = String(item.project || '');
 
-                if (plate.toLowerCase().includes(filter) || code.toLowerCase().includes(filter) || project.toLowerCase().includes(filter)) {
+                if (plate.toLowerCase().includes(filter) || code.toLowerCase().includes(filter)) {
                     const el = document.createElement('div');
                     el.className = 'list-item';
                     el.innerHTML = `
@@ -1645,7 +1976,6 @@
                             <span class="item-main"><i class="fas fa-car"></i> ${plate}</span>
                             <span class="item-sub">
                                 <span><i class="fas fa-microchip"></i> ${code}</span>
-                                ${project ? `<span><i class="fas fa-folder"></i> ${project}</span>` : ''}
                             </span>
                         </div>
                         <button onclick="deletePlate('${key}')" class="delete-btn" title="حذف">
@@ -1661,7 +1991,7 @@
             const list = document.getElementById('projects-list');
             list.innerHTML = '';
 
-            Object.entries(db.projects || {}).forEach(([key, val]) => {
+            Object.entries(localData.projects || {}).forEach(([key, val]) => {
                 if (!val) return;
                 
                 const el = document.createElement('div');
@@ -1678,172 +2008,70 @@
             });
         };
 
-        // CRUD Operations
+        // ==================== CRUD OPERATIONS ====================
         window.handleAddPlate = function(e) {
             e.preventDefault();
             const plate = document.getElementById('new-plate-num').value.trim();
             const code = document.getElementById('new-plate-code').value.trim();
-            const project = document.getElementById('new-plate-project').value;
 
-            if (!plate || !code) return;
+            if (!plate || !code) {
+                showToast('الرجاء إدخال رقم اللوحة والكود', 'warning');
+                return;
+            }
 
-            push(platesRef, { 
-                plate: plate, 
-                code: code, 
-                project: project || '' 
-            }).then(() => {
-                closeModal('modal-add-plate');
-                e.target.reset();
-                showToast(translations[currentLang].import_success);
-            });
+            const newKey = 'plate_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            localData.plates[newKey] = {
+                plate: plate,
+                code: code,
+                project: ''
+            };
+            
+            saveLocalData();
+            closeModal('modal-add-plate');
+            e.target.reset();
+            renderPlatesList();
+            showToast('تم حفظ البيانات بنجاح');
         };
 
         window.deletePlate = function(key) {
-            if (confirm(translations[currentLang].confirm_delete)) {
-                remove(ref(database, `plates/${key}`)).then(() => {
-                    showToast('تم الحذف بنجاح');
-                });
+            if (confirm('هل أنت متأكد من الحذف؟')) {
+                delete localData.plates[key];
+                saveLocalData();
+                renderPlatesList();
+                showToast('تم الحذف بنجاح');
             }
         };
 
         window.handleAddProject = function(e) {
             e.preventDefault();
             const name = document.getElementById('new-project-name').value.trim();
-            if (!name) return;
-
-            push(projectsRef, name).then(() => {
-                closeModal('modal-add-project');
-                e.target.reset();
-                showToast('تم إضافة المشروع');
-            });
-        };
-
-        window.deleteProject = function(key) {
-            if (confirm(translations[currentLang].confirm_delete)) {
-                remove(ref(database, `projects/${key}`)).then(() => {
-                    showToast('تم الحذف بنجاح');
-                });
-            }
-        };
-
-        // Import Functions
-        window.handleExcelImport = function() {
-            const fileInput = document.getElementById('excel-file');
-            const file = fileInput.files[0];
-
-            if (!file) {
-                showToast('الرجاء اختيار ملف أولاً', 'warning');
+            if (!name) {
+                showToast('الرجاء إدخال اسم المشروع', 'warning');
                 return;
             }
 
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const data = new Uint8Array(e.target.result);
-                    const workbook = XLSX.read(data, { type: 'array' });
-                    const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
-                    const jsonData = XLSX.utils.sheet_to_json(firstSheet);
-
-                    if (jsonData.length === 0) {
-                        showToast('الملف فارغ', 'warning');
-                        return;
-                    }
-
-                    let successCount = 0;
-                    
-                    jsonData.forEach(row => {
-                        // محاولة قراءة الأعمدة بصيغ مختلفة
-                        let code = null;
-                        let plate = null;
-                        let project = null;
-                        
-                        // البحث عن الكود
-                        if (row['Code']) code = row['Code'];
-                        else if (row['code']) code = row['code'];
-                        else if (row['كود']) code = row['كود'];
-                        else if (row['الكود']) code = row['الكود'];
-                        else if (row['C']) code = row['C'];
-                        
-                        // البحث عن رقم اللوحة
-                        if (row['Vehicle']) plate = row['Vehicle'];
-                        else if (row['vehicle']) plate = row['vehicle'];
-                        else if (row['Plate']) plate = row['Plate'];
-                        else if (row['plate']) plate = row['plate'];
-                        else if (row['اللوحة']) plate = row['اللوحة'];
-                        else if (row['رقم اللوحة']) plate = row['رقم اللوحة'];
-                        else if (row['V']) plate = row['V'];
-                        else if (row['P']) plate = row['P'];
-                        
-                        // البحث عن المشروع
-                        if (row['Project']) project = row['Project'];
-                        else if (row['project']) project = row['project'];
-                        else if (row['المشروع']) project = row['المشروع'];
-                        else if (row['Branch']) project = row['Branch'];
-                        else if (row['branch']) project = row['branch'];
-
-                        // إذا لم نجد الأعمدة المطلوبة، نجرب الأعمدة الرقمية
-                        if (!code || !plate) {
-                            const keys = Object.keys(row);
-                            if (keys.length >= 2) {
-                                // نفترض أن أول عمود هو الكود والثاني هو اللوحة
-                                if (!code) code = row[keys[0]];
-                                if (!plate) plate = row[keys[1]];
-                                if (keys.length >= 3 && !project) project = row[keys[2]];
-                            }
-                        }
-
-                        if (code && plate) {
-                            push(platesRef, {
-                                plate: String(plate).trim(),
-                                code: String(code).trim(),
-                                project: project ? String(project).trim() : ''
-                            });
-                            successCount++;
-                        }
-                    });
-
-                    showToast(`تم استيراد ${successCount} سجل بنجاح`);
-                    fileInput.value = '';
-
-                } catch (err) {
-                    console.error(err);
-                    showToast('خطأ في قراءة الملف: ' + err.message, 'error');
-                }
-            };
-            reader.readAsArrayBuffer(file);
+            const newKey = 'project_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            localData.projects[newKey] = name;
+            
+            saveLocalData();
+            closeModal('modal-add-project');
+            e.target.reset();
+            renderProjectsList();
+            showToast('تم إضافة المشروع بنجاح');
         };
 
-        // بيانات تجريبية للاختبار
-        window.addSampleData = function() {
-            const samplePlates = [
-                { plate: 'أ ب ج 123', code: '100001', project: 'مشروع الرياض' },
-                { plate: 'د ه و 456', code: '100002', project: 'مشروع جدة' },
-                { plate: 'س ص ط 789', code: '100003', project: '' },
-                { plate: '٧ ٥ ٠ ٣ - س ص ب', code: '100004', project: 'مشروع الدمام' },
-                { plate: 'ABC123', code: '100005', project: '' },
-                { plate: 'XYZ789', code: '100006', project: 'مشروع مكة' }
-            ];
-
-            // إضافة المشاريع أولاً
-            const projects = ['مشروع الرياض', 'مشروع جدة', 'مشروع الدمام', 'مشروع مكة'];
-            projects.forEach(proj => {
-                push(projectsRef, proj);
-            });
-
-            // إضافة اللوحات
-            samplePlates.forEach(item => {
-                push(platesRef, item);
-            });
-
-            showToast('تم إضافة بيانات تجريبية');
+        window.deleteProject = function(key) {
+            if (confirm('هل أنت متأكد من الحذف؟')) {
+                delete localData.projects[key];
+                saveLocalData();
+                renderProjectsList();
+                showToast('تم الحذف بنجاح');
+            }
         };
 
-        // Modal Utils
+        // ==================== MODAL UTILS ====================
         window.openModal = function(id) {
             document.getElementById(id).classList.add('active');
-            if (id === 'modal-add-plate') {
-                updateProjectSelect();
-            }
         };
 
         window.closeModal = function(id) {
