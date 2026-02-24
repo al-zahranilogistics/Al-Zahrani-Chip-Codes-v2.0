@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Al-Zahrani Chip Codes v2.0 | نظام أكواد الشرائح المتقدم</title>
+    <title>Al-Zahrani Chip Codes v2.5 | نظام أكواد الشرائح المتقدم</title>
     
-    <!-- PWA Manifest for Installation -->
+    <!-- PWA Manifest -->
     <link rel="manifest" href="data:application/manifest+json,{
         &quot;name&quot;: &quot;الزهراني - أكواد الشرائح&quot;,
         &quot;short_name&quot;: &quot;Chip Codes&quot;,
@@ -36,6 +36,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        /* نفس التصميم السابق مع إضافة بعض التحسينات */
         * {
             margin: 0;
             padding: 0;
@@ -553,6 +554,26 @@
             color: var(--success);
         }
 
+        /* Sample Data Button */
+        .sample-data-btn {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: var(--accent);
+            padding: 10px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .sample-data-btn:hover {
+            background: rgba(245, 158, 11, 0.2);
+        }
+
         /* Lists */
         .list-container {
             max-height: 400px;
@@ -887,7 +908,7 @@
         <span id="lang-text">English</span>
     </div>
 
-    <!-- INSTALL BUTTON (PWA) -->
+    <!-- INSTALL BUTTON -->
     <button id="install-btn" class="install-btn hidden">
         <i class="fas fa-download"></i>
         <span data-i18n="install_app">تثبيت التطبيق</span>
@@ -925,7 +946,7 @@
                 <form id="search-by-plate-form" onsubmit="handleSearchByPlate(event)">
                     <div class="input-group">
                         <input type="text" id="plate-search" class="input-field" 
-                               placeholder="أدخل رقم اللوحة (مثال: أ ب ج 123)" 
+                               placeholder="أدخل رقم اللوحة (مثال: أ ب ج 123 أو ABC123)" 
                                required data-i18n-placeholder="search_plate_placeholder">
                     </div>
                     <button type="submit" class="btn">
@@ -953,14 +974,14 @@
             <!-- Result Display -->
             <div id="search-result" class="result-card hidden">
                 <div class="result-title">
-                    <span data-i18n="result_text">كود الشريحة للوحة</span> 
-                    <span id="res-plate" style="color:white; font-weight:bold;"></span>
+                    <span data-i18n="result_text">نتيجة البحث</span>
                 </div>
                 <div class="result-code" id="res-code">...</div>
+                <div style="margin-top: 10px; color: var(--text-muted); font-size: 14px;" id="res-plate"></div>
             </div>
 
             <div id="search-error" class="result-card no-result hidden">
-                <div class="result-code" data-i18n="no_result">عذراً، اللوحة غير مسجلة في النظام</div>
+                <div class="result-code" data-i18n="no_result">عذراً، البيانات غير موجودة في النظام</div>
             </div>
 
             <!-- Stats -->
@@ -1041,6 +1062,12 @@
                 </div>
             </div>
 
+            <!-- Sample Data Button (للتجربة) -->
+            <div class="sample-data-btn" onclick="addSampleData()">
+                <i class="fas fa-flask"></i>
+                <span>إضافة بيانات تجريبية (نموذج)</span>
+            </div>
+
             <div class="admin-nav">
                 <div class="nav-btn active" onclick="switchAdminTab('plates')">
                     <i class="fas fa-car"></i>
@@ -1059,43 +1086,37 @@
                     <span data-i18n="add_plate_btn">+ إضافة لوحة جديدة</span>
                 </button>
 
-                <!-- Enhanced Import Section -->
+                <!-- Import Section -->
                 <div class="import-section">
                     <div class="import-title">
                         <i class="fas fa-file-excel"></i>
-                        <span data-i18n="import_excel_title">استيراد بيانات من Excel أو نص</span>
+                        <span>استيراد بيانات من Excel</span>
                     </div>
                     
                     <!-- Excel Import -->
                     <div class="file-input-wrapper">
-                        <input type="file" id="excel-file" accept=".xlsx, .xls, .csv, .txt">
+                        <input type="file" id="excel-file" accept=".xlsx, .xls, .csv">
                         <div class="file-input-label">
                             <i class="fas fa-upload"></i>
-                            <span data-i18n="choose_file">اختر ملف Excel أو نص</span>
+                            <span>اختر ملف Excel الخاص بك</span>
                         </div>
                     </div>
                     
-                    <!-- Text Import -->
-                    <textarea id="text-import-data" class="input-field" rows="4" 
-                              placeholder="أو الصق البيانات هنا (كود, لوحة, مشروع) كل سطر: 123456,ABC123,مشروع1" 
-                              style="margin-bottom: 10px;"></textarea>
+                    <button onclick="handleExcelImport()" class="btn btn-success" style="margin-top: 10px;">
+                        <i class="fas fa-file-import"></i>
+                        <span>استيراد البيانات</span>
+                    </button>
                     
-                    <div style="display: flex; gap: 10px;">
-                        <button onclick="handleExcelImport()" class="btn btn-success" style="flex:1;">
-                            <i class="fas fa-file-import"></i>
-                            <span data-i18n="import_excel">استيراد Excel</span>
-                        </button>
-                        <button onclick="handleTextImport()" class="btn btn-info" style="flex:1;">
-                            <i class="fas fa-paste"></i>
-                            <span data-i18n="import_text">استيراد نص</span>
-                        </button>
-                    </div>
+                    <p style="color: var(--text-muted); font-size: 12px; margin-top: 10px; text-align: center;">
+                        <i class="fas fa-info-circle"></i>
+                        الملف يجب أن يحتوي على أعمدة: رقم اللوحة، الكود (ويمكن إضافة عمود المشروع)
+                    </p>
                 </div>
 
                 <!-- Search -->
                 <div class="input-group">
                     <input type="text" id="admin-search-plate" onkeyup="renderPlatesList()" class="input-field" 
-                           placeholder="بحث سريع..." data-i18n-placeholder="quick_search">
+                           placeholder="بحث سريع في اللوحات والأكواد..." data-i18n-placeholder="quick_search">
                 </div>
 
                 <!-- Plates List -->
@@ -1123,11 +1144,11 @@
             <form onsubmit="handleAddPlate(event)">
                 <div class="input-group">
                     <label data-i18n="plate_label">رقم اللوحة</label>
-                    <input type="text" id="new-plate-num" class="input-field" required>
+                    <input type="text" id="new-plate-num" class="input-field" placeholder="مثال: أ ب ج 123 أو ABC123" required>
                 </div>
                 <div class="input-group">
                     <label data-i18n="code_label">كود الشريحة</label>
-                    <input type="text" id="new-plate-code" class="input-field" required>
+                    <input type="text" id="new-plate-code" class="input-field" placeholder="مثال: 123456" required>
                 </div>
                 <div class="input-group">
                     <label data-i18n="project_label">المشروع (اختياري)</label>
@@ -1201,11 +1222,11 @@
                 app_subtitle: "مجموعة الزهراني",
                 search_title: "استعلام عن كود الشريحة",
                 search_desc: "أدخل رقم اللوحة للحصول على الكود الخاص بها",
-                search_plate_placeholder: "رقم اللوحة (مثال: أ ب ج 123)",
+                search_plate_placeholder: "رقم اللوحة (مثال: أ ب ج 123 أو ABC123)",
                 search_code_placeholder: "كود الشريحة (مثال: 123456)",
                 search_plate_btn: "بحث عن الكود",
                 search_code_btn: "بحث عن اللوحة",
-                result_text: "كود الشريحة للوحة",
+                result_text: "نتيجة البحث",
                 no_result: "عذراً، البيانات غير موجودة في النظام",
                 admin_login_link: "دخول المدير",
                 admin_panel_title: "الدخول للوحة التحكم",
@@ -1231,8 +1252,8 @@
                 add_project_title: "إضافة مشروع جديد",
                 project_label: "اسم المشروع",
                 confirm_delete: "هل أنت متأكد من الحذف؟",
-                import_excel_title: "استيراد بيانات من Excel أو نص",
-                choose_file: "اختر ملف Excel أو نص",
+                import_excel_title: "استيراد بيانات من Excel",
+                choose_file: "اختر ملف Excel",
                 import_excel: "استيراد Excel",
                 import_text: "استيراد نص",
                 import_success: "تم استيراد البيانات بنجاح!",
@@ -1255,7 +1276,7 @@
                 search_code_placeholder: "Chip Code (e.g., 123456)",
                 search_plate_btn: "Search Code",
                 search_code_btn: "Search Plate",
-                result_text: "Code for plate",
+                result_text: "Search Result",
                 no_result: "Sorry, data not found in system",
                 admin_login_link: "Admin Login",
                 admin_panel_title: "Admin Login",
@@ -1281,8 +1302,8 @@
                 add_project_title: "Add New Project",
                 project_label: "Project Name",
                 confirm_delete: "Are you sure you want to delete this?",
-                import_excel_title: "Import from Excel or Text",
-                choose_file: "Choose Excel or Text file",
+                import_excel_title: "Import from Excel",
+                choose_file: "Choose Excel file",
                 import_excel: "Import Excel",
                 import_text: "Import Text",
                 import_success: "Data imported successfully!",
@@ -1432,7 +1453,7 @@
             });
         }
 
-        // Plate Normalization
+        // Plate Normalization (محسن)
         const arabicToEnglishMap = {
             'أ': 'A', 'ا': 'A', 'إ': 'A', 'آ': 'A',
             'ب': 'B',
@@ -1486,8 +1507,8 @@
             const query = document.getElementById('plate-search').value;
             const resultBox = document.getElementById('search-result');
             const errorBox = document.getElementById('search-error');
-            const resPlate = document.getElementById('res-plate');
             const resCode = document.getElementById('res-code');
+            const resPlate = document.getElementById('res-plate');
 
             if (!query) return;
 
@@ -1499,8 +1520,8 @@
             if (found) {
                 resultBox.classList.remove('hidden');
                 errorBox.classList.add('hidden');
-                resPlate.textContent = found.plate;
                 resCode.textContent = found.code;
+                resPlate.innerHTML = `<i class="fas fa-car"></i> ${found.plate} ${found.project ? '<br><small><i class="fas fa-folder"></i> ' + found.project + '</small>' : ''}`;
             } else {
                 resultBox.classList.add('hidden');
                 errorBox.classList.remove('hidden');
@@ -1512,8 +1533,8 @@
             const query = document.getElementById('code-search').value.trim();
             const resultBox = document.getElementById('search-result');
             const errorBox = document.getElementById('search-error');
-            const resPlate = document.getElementById('res-plate');
             const resCode = document.getElementById('res-code');
+            const resPlate = document.getElementById('res-plate');
 
             if (!query) return;
 
@@ -1523,8 +1544,8 @@
             if (found) {
                 resultBox.classList.remove('hidden');
                 errorBox.classList.add('hidden');
-                resPlate.textContent = found.plate;
                 resCode.textContent = found.code;
+                resPlate.innerHTML = `<i class="fas fa-car"></i> ${found.plate} ${found.project ? '<br><small><i class="fas fa-folder"></i> ' + found.project + '</small>' : ''}`;
             } else {
                 resultBox.classList.add('hidden');
                 errorBox.classList.remove('hidden');
@@ -1621,7 +1642,7 @@
                     el.className = 'list-item';
                     el.innerHTML = `
                         <div class="item-info">
-                            <span class="item-main">${plate}</span>
+                            <span class="item-main"><i class="fas fa-car"></i> ${plate}</span>
                             <span class="item-sub">
                                 <span><i class="fas fa-microchip"></i> ${code}</span>
                                 ${project ? `<span><i class="fas fa-folder"></i> ${project}</span>` : ''}
@@ -1729,10 +1750,47 @@
                     }
 
                     let successCount = 0;
+                    
                     jsonData.forEach(row => {
-                        const code = row['Code'] || row['code'] || row['كود'] || row['الكود'];
-                        const plate = row['Vehicle'] || row['vehicle'] || row['Plate'] || row['plate'] || row['اللوحة'] || row['رقم اللوحة'];
-                        const project = row['Project'] || row['project'] || row['المشروع'] || row['Branch'] || row['branch'];
+                        // محاولة قراءة الأعمدة بصيغ مختلفة
+                        let code = null;
+                        let plate = null;
+                        let project = null;
+                        
+                        // البحث عن الكود
+                        if (row['Code']) code = row['Code'];
+                        else if (row['code']) code = row['code'];
+                        else if (row['كود']) code = row['كود'];
+                        else if (row['الكود']) code = row['الكود'];
+                        else if (row['C']) code = row['C'];
+                        
+                        // البحث عن رقم اللوحة
+                        if (row['Vehicle']) plate = row['Vehicle'];
+                        else if (row['vehicle']) plate = row['vehicle'];
+                        else if (row['Plate']) plate = row['Plate'];
+                        else if (row['plate']) plate = row['plate'];
+                        else if (row['اللوحة']) plate = row['اللوحة'];
+                        else if (row['رقم اللوحة']) plate = row['رقم اللوحة'];
+                        else if (row['V']) plate = row['V'];
+                        else if (row['P']) plate = row['P'];
+                        
+                        // البحث عن المشروع
+                        if (row['Project']) project = row['Project'];
+                        else if (row['project']) project = row['project'];
+                        else if (row['المشروع']) project = row['المشروع'];
+                        else if (row['Branch']) project = row['Branch'];
+                        else if (row['branch']) project = row['branch'];
+
+                        // إذا لم نجد الأعمدة المطلوبة، نجرب الأعمدة الرقمية
+                        if (!code || !plate) {
+                            const keys = Object.keys(row);
+                            if (keys.length >= 2) {
+                                // نفترض أن أول عمود هو الكود والثاني هو اللوحة
+                                if (!code) code = row[keys[0]];
+                                if (!plate) plate = row[keys[1]];
+                                if (keys.length >= 3 && !project) project = row[keys[2]];
+                            }
+                        }
 
                         if (code && plate) {
                             push(platesRef, {
@@ -1755,47 +1813,29 @@
             reader.readAsArrayBuffer(file);
         };
 
-        window.handleTextImport = function() {
-            const textData = document.getElementById('text-import-data').value.trim();
-            if (!textData) {
-                showToast('الرجاء إدخال البيانات', 'warning');
-                return;
-            }
+        // بيانات تجريبية للاختبار
+        window.addSampleData = function() {
+            const samplePlates = [
+                { plate: 'أ ب ج 123', code: '100001', project: 'مشروع الرياض' },
+                { plate: 'د ه و 456', code: '100002', project: 'مشروع جدة' },
+                { plate: 'س ص ط 789', code: '100003', project: '' },
+                { plate: '٧ ٥ ٠ ٣ - س ص ب', code: '100004', project: 'مشروع الدمام' },
+                { plate: 'ABC123', code: '100005', project: '' },
+                { plate: 'XYZ789', code: '100006', project: 'مشروع مكة' }
+            ];
 
-            const lines = textData.split('\n');
-            let successCount = 0;
-
-            lines.forEach(line => {
-                line = line.trim();
-                if (!line) return;
-
-                // Try different separators
-                let parts = line.split(',').map(p => p.trim());
-                if (parts.length < 2) {
-                    parts = line.split(';').map(p => p.trim());
-                }
-                if (parts.length < 2) {
-                    parts = line.split(/\s+/).map(p => p.trim());
-                }
-
-                if (parts.length >= 2) {
-                    const code = parts[0];
-                    const plate = parts[1];
-                    const project = parts.length >= 3 ? parts[2] : '';
-
-                    if (code && plate) {
-                        push(platesRef, {
-                            plate: plate,
-                            code: code,
-                            project: project
-                        });
-                        successCount++;
-                    }
-                }
+            // إضافة المشاريع أولاً
+            const projects = ['مشروع الرياض', 'مشروع جدة', 'مشروع الدمام', 'مشروع مكة'];
+            projects.forEach(proj => {
+                push(projectsRef, proj);
             });
 
-            showToast(`تم استيراد ${successCount} سجل بنجاح`);
-            document.getElementById('text-import-data').value = '';
+            // إضافة اللوحات
+            samplePlates.forEach(item => {
+                push(platesRef, item);
+            });
+
+            showToast('تم إضافة بيانات تجريبية');
         };
 
         // Modal Utils
