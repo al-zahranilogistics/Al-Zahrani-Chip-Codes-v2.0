@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Al-Zahrani Chip Codes v4.0 | نظام أكواد الشرائح المتقدم</title>
+    <title>Al-Zahrani Chip Codes v4.2 | نظام أكواد الشرائح</title>
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="data:application/manifest+json,{
@@ -36,6 +36,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        /* نفس التصميم السابق مع تحسينات بسيطة */
         * {
             margin: 0;
             padding: 0;
@@ -825,7 +826,7 @@
             <div id="search-plate-tab">
                 <div class="input-group">
                     <input type="text" id="plate-search" class="input-field" 
-                           placeholder="أدخل رقم اللوحة (مثال: ٧ ٥ ٠ ٣ - س ص ب)" 
+                           placeholder="أدخل رقم اللوحة (مثال: 1480 ETB أو ٧٥٠٣ س ص ب)" 
                            data-i18n-placeholder="search_plate_placeholder"
                            onkeypress="if(event.key === 'Enter') handleSearchByPlate()">
                 </div>
@@ -839,7 +840,7 @@
             <div id="search-code-tab" class="hidden">
                 <div class="input-group">
                     <input type="text" id="code-search" class="input-field" 
-                           placeholder="أدخل كود الشريحة (مثال: 2213)"
+                           placeholder="أدخل كود الشريحة (مثال: 6232)"
                            data-i18n-placeholder="search_code_placeholder"
                            onkeypress="if(event.key === 'Enter') handleSearchByCode()">
                 </div>
@@ -1013,11 +1014,11 @@
             <form onsubmit="handleAddPlate(event)">
                 <div class="input-group">
                     <label data-i18n="plate_label">رقم اللوحة</label>
-                    <input type="text" id="new-plate-num" class="input-field" placeholder="مثال: ٧ ٥ ٠ ٣ - س ص ب" required>
+                    <input type="text" id="new-plate-num" class="input-field" placeholder="مثال: 1480 ETB أو ٧٥٠٣ س ص ب" required>
                 </div>
                 <div class="input-group">
                     <label data-i18n="code_label">كود الشريحة</label>
-                    <input type="text" id="new-plate-code" class="input-field" placeholder="مثال: 2213" required>
+                    <input type="text" id="new-plate-code" class="input-field" placeholder="مثال: 6232" required>
                 </div>
                 <button type="submit" class="btn">
                     <i class="fas fa-save"></i>
@@ -1208,7 +1209,473 @@
             { code: "9718", plate: "٨ ١ ٧ ١ - ا س ح" },
             { code: "2335", plate: "٣ ٦ ٦ ٨ - ا ص ب" },
             { code: "6788", plate: "٣ ٧ ٢ ٩ - ب ط ص" },
-            { code: "1974", plate: "٦ ٨ ٣ ٥ - ا س ك" }
+            { code: "1974", plate: "٦ ٨ ٣ ٥ - ا س ك" },
+            { code: "5899", plate: "٩٨٤٩ - ر ب ك" },
+            { code: "2923", plate: "١٤١٥ - ب ن س" },
+            { code: "9348", plate: "٣٧٦١ - ب ص ن" },
+            { code: "4950", plate: "٣٨٦٦ - ب ص ن" },
+            { code: "9639", plate: "٤٧٠٨ - ب ص ن" },
+            { code: "2329", plate: "٤٧٣٩ - ب ص ع" },
+            { code: "3483", plate: "٥٩٣٣ - ب ص ك" },
+            { code: "6534", plate: "٦٣٠٤ - ب ص ب" },
+            { code: "4771", plate: "٦٢٢٥ - ب ص ك" },
+            { code: "2666", plate: "٩٧٣٢ - ب ط س" },
+            { code: "9135", plate: "٩٧٣٥ - ب ط س" },
+            { code: "9549", plate: "٩٧٣٨ - ب ط س" },
+            { code: "6671", plate: "٣٧٢٥ - ب ط س" },
+            { code: "4140", plate: "٣٧٠٤ - ب ط ص" },
+            { code: "4271", plate: "٣٧٤٨ - ب ط ص" },
+            { code: "8017", plate: "٣٧٤٩ - ب ط ص" },
+            { code: "6102", plate: "٩٠٦٠ - ب ط ق" },
+            { code: "7000", plate: "٩٤١٢ - ب ط ق" },
+            { code: "9085", plate: "٤٥٣٨ - ا س و" },
+            { code: "1250", plate: "٢٢٣٤ - ا س ا" },
+            { code: "7439", plate: "٨٤٢٢ - ب ص س" },
+            { code: "5224", plate: "٧٤٥٠ - ا س م" },
+            { code: "9493", plate: "٣٠٤١ - ا س ح" },
+            { code: "4919", plate: "٢١٩٠ - ا س ا" },
+            { code: "5521", plate: "٩٤٣٦ - ا س و" },
+            { code: "3970", plate: "٣٦٢٢ - ب ص د" },
+            { code: "8785", plate: "٩٥٨٣ - ب ص ح" },
+            { code: "8443", plate: "٥٢٧٤ - ا س ب" },
+            { code: "6419", plate: "٧٢٦٦ - ا ص ا" },
+            { code: "2604", plate: "٣٦٦٨ - ا ص ب" },
+            { code: "2810", plate: "٣٤١٣ - أ س ح" },
+            { code: "9149", plate: "٥٢٨٨ - ا س ب" },
+            { code: "1123", plate: "٩ ١ ٨ ٥ - ا س ل" },
+            { code: "2057", plate: "٥٨٦٩ - ا س ك" },
+            { code: "7994", plate: "١٨٣٩ - ا ص د" },
+            { code: "7809", plate: "٨٢٨٦ - ب ص س" },
+            { code: "1197", plate: "٦٨٤١ - ا ا ب" },
+            { code: "9961", plate: "٩١٥١ - ا س ن" },
+            { code: "5060", plate: "٥٢٨٥ - ا س ب" },
+            { code: "2952", plate: "٥٢٨٥ - ا س ب" },
+            { code: "7260", plate: "٥٦٢٩ - ا س ل" },
+            { code: "2547", plate: "٥ ٤ ١ ٨ - ا ص س" },
+            { code: "8472", plate: "٦ ٨ ٤ ٤ - ا ص ر" },
+            { code: "2851", plate: "٦٦٨٧ - ا ص ر" },
+            { code: "6149", plate: "٨٣٣٤ - ب ص س" },
+            { code: "4526", plate: "٨٨٣٧ - ب س ن" },
+            { code: "7061", plate: "٦٨٤٢ - ا س ب" },
+            { code: "2073", plate: "٩٧٠٢ - ا ص ا" },
+            { code: "9849", plate: "٢ ٧ ٣ ٦ - ا س و" },
+            { code: "3286", plate: "٣٢١١ - ا س ع" },
+            { code: "6946", plate: "٢٥٨١ - ا ص ط" },
+            { code: "5477", plate: "٥٢٩٦ - ا ص ق" },
+            { code: "8406", plate: "٢٠٠٨ - ا ص ر" },
+            { code: "7147", plate: "٢٠٠٩ - ا ص ر" },
+            { code: "8110", plate: "٢٠١٠ - ا ص ر" },
+            { code: "5887", plate: "٤١٥٢ - ا ص ب" },
+            { code: "6280", plate: "٤ ١ ٥ ٦ - ا ص ب" },
+            { code: "4691", plate: "٢٠٢٥ - ا ص ر" },
+            { code: "5441", plate: "٦٥٠٣ - ا ص ر" },
+            { code: "2480", plate: "٢٠٠٥ - ا ص ر" },
+            { code: "4633", plate: "٢٠٣٧ - ا ص ر" },
+            { code: "7125", plate: "٢٠٣٨ - ا ص ر" },
+            { code: "2245", plate: "٢٠٤٥ - ا ص ر" },
+            { code: "3243", plate: "٧٣٩٧ - ا س ى" },
+            { code: "3956", plate: "٢ ٩ ٠ ٥ - ب ع ق" },
+            { code: "5707", plate: "١٣٦٣ - ا ص ب" },
+            { code: "9522", plate: "٥ ٦ ٩ ٩ - ا ا ا" },
+            { code: "3720", plate: "٧ ٢ ٠ ٨ - ا د و" },
+            { code: "8522", plate: "٢٠٧٧ - ا ص ر" },
+            { code: "2622", plate: "٩١٨٩ - ا س ل" },
+            { code: "8020", plate: "٦٩٤١ - ا ص ر" },
+            { code: "8178", plate: "٩ ٧ ٢ ٥ - ب ط س" },
+            { code: "6107", plate: "٢ ٠ ٥ ٥ - ا ص ر" },
+            { code: "1441", plate: "٣ ٠ ٨ ٠ - ا ط ب" },
+            { code: "3313", plate: "٦ ٨ ٣ ٧ - ا ص ى" },
+            { code: "4968", plate: "٦ ٤ ٩ ٧ - ب ر ى" },
+            { code: "5607", plate: "٦ ٦ ٤ ٩ - ب ق ق" },
+            { code: "6123", plate: "٤ ٠ ٠ ٦ - ا ص ه" },
+            { code: "4011", plate: "٦ ٨ ٧ ٣ - ا ص ى" },
+            { code: "8016", plate: "٩٤١٢ - ب ط ق" },
+            { code: "8281", plate: "١٠١٥ - ب ط ع" },
+            { code: "8043", plate: "٩٤٠٧ - ب ط ق" },
+            { code: "2341", plate: "٩٠٧٠ - ب س م" },
+            { code: "8323", plate: "٦٤٩٧ - ب ر ى" },
+            { code: "9111", plate: "٢٠٢٥ - ا ص ر" },
+            { code: "7013", plate: "٢ ٠ ٣ ٨ - ا ص ر" },
+            { code: "3430", plate: "٦ ٩ ٥ ٨ - ب ق ن" },
+            { code: "8656", plate: "٧ ٥ ٩ ٩ - ر ط ح" },
+            { code: "7159", plate: "٦ ٠ ١ ١ - د د ر" },
+            { code: "7820", plate: "٨ ٢ ٣ ٦ - ا" },
+            { code: "1258", plate: "٦ ٧ ٨ ١ - ب ق ن" },
+            { code: "8158", plate: "٢ ٢ ٣ ٤ - ا س ا" },
+            { code: "1591", plate: "٩ ٠ ٤ ٢ - ب س م" },
+            { code: "2820", plate: "٦ ٦ ١ ٩ - ب ق ن" },
+            { code: "6846", plate: "٦ ٧ ٧ ٩ - ب ق ن" },
+            { code: "8744", plate: "٧ ٣ ٦ ٥ - ا س ل" },
+            { code: "7930", plate: "٥٩٧٢ - د ك ط" },
+            { code: "9613", plate: "٥٤٥٨ - د ع ح" },
+            { code: "6152", plate: "٤٥٨٨ - د ب ع" },
+            { code: "5382", plate: "٥٦٥٧ - د ص ط" },
+            { code: "1768", plate: "١٠٩٨ - د ص ط" },
+            { code: "1803", plate: "١٧١٢ - د ر ع" },
+            { code: "2018", plate: "٦٦٥٧ - ب ص ب" },
+            { code: "8545", plate: "١٤٠٨ - ب س ن" },
+            { code: "1131", plate: "١٤١٠ - ب س ن" },
+            { code: "1011", plate: "٣٩٣٧ - ب ص ن" },
+            { code: "4587", plate: "٣٩٤٠ - ب ص ن" },
+            { code: "0548", plate: "٣٩٤١ - ب ص ن" },
+            { code: "7007", plate: "٣٩٣٨ - ب ص ن" },
+            { code: "5249", plate: "٥٨٣٣ - ب ص ن" },
+            { code: "7375", plate: "٣٩٤٣ - ب ص ن" },
+            { code: "2030", plate: "٥ ٨ ٣ ٧ - ب ص ن" },
+            { code: "8640", plate: "٥٨٣٦ - ب ص ن" },
+            { code: "5866", plate: "٥٩٤٦ - ب ص م" },
+            { code: "3471", plate: "٥٩٠٤ - ب ص ك" },
+            { code: "7444", plate: "٤٧١٠ - ب ص ع" },
+            { code: "2959", plate: "٥٦٨٣ - ب ص ك" },
+            { code: "7927", plate: "٤٧٠٥ - ب ص ع" },
+            { code: "5780", plate: "٤٧٤٠ - ب ص ع" },
+            { code: "6415", plate: "٤٧٠٤ - ب ص ع" },
+            { code: "4431", plate: "٤٧٩٧ - ب ص ع" },
+            { code: "8378", plate: "٤٧٣٤ - ب ص ع" },
+            { code: "6736", plate: "٤٧٠٦ - ب ص ع" },
+            { code: "7380", plate: "٤٧٣٥ - ب ص ع" },
+            { code: "0195", plate: "٤٧٠٩ - ب ص ع" },
+            { code: "7118", plate: "٤٧٠٢ - ب ص ع" },
+            { code: "6005", plate: "٤٧١٠ - ب ص ط" },
+            { code: "5857", plate: "٢٢٢٠ - أ س أ" },
+            { code: "9023", plate: "٤٧١٥ - ب ص ط" },
+            { code: "2852", plate: "٢٢٨٩ - ب س ن" },
+            { code: "6846", plate: "٢٢٧٦ - ب س ن" },
+            { code: "4223", plate: "٩٥١٩ - ب س ل" },
+            { code: "4537", plate: "٩٤٧٣ - ب س ل" },
+            { code: "3043", plate: "٩ ٧ ٣ ٣ - ب ط س" },
+            { code: "9739", plate: "٩٧٣٦ - ب ط س" },
+            { code: "6330", plate: "٩ ٧ ١ ٠ - ب ط س" },
+            { code: "1531", plate: "٩٧٣٤ - ب ط س" },
+            { code: "2678", plate: "٣٧٠٣ - ب ط ص" },
+            { code: "9448", plate: "٣٧٠٥ - ب ط ص" },
+            { code: "2431", plate: "٩ ٧ ٤ ٤ - ب ط س" },
+            { code: "3434", plate: "٩ ٧ ٠ ٦ - ب ط س" },
+            { code: "1550", plate: "٩٧٠١ - ب ط س" },
+            { code: "7837", plate: "٣٧٢٢ - ب ط ص" },
+            { code: "9317", plate: "٣٧٤٤ - ب ط ص" },
+            { code: "9995", plate: "٩٤٦٩ - ب س ل" },
+            { code: "8772", plate: "٣٧٤٦ - ب ط ص" },
+            { code: "9413", plate: "٣٧٤٠ - ب ط ص" },
+            { code: "1590", plate: "٣٧٢٦ - ب ط ص" },
+            { code: "6062", plate: "٩٧٢٣ - ب ط س" },
+            { code: "1482", plate: "٩٧٢٠ - ب ط س" },
+            { code: "4400", plate: "٣ ٧ ٠ ٩ - ب ط ص" },
+            { code: "6783", plate: "٣ ٧ ٠ ٧ - ب ط ص" },
+            { code: "1837", plate: "٩٧٤٦ - ب ط ص" },
+            { code: "4732", plate: "٩٧٢٩ - ب ط س" },
+            { code: "3573", plate: "٩٧٢٢ - ب ط س" },
+            { code: "4595", plate: "٣ ٧ ٥ ٠ - ب ط ص" },
+            { code: "9868", plate: "١ ٩ ٤ ٩ - ب ط ع" },
+            { code: "2357", plate: "٩ ٨ ٨ ٣ - ب ط ق" },
+            { code: "3169", plate: "٩٤٢٢ - ب ط ق" },
+            { code: "4327", plate: "٩ ٠ ٦ ٤ - ب ط ق" },
+            { code: "9572", plate: "١٤٧٤ - ب ط ع" },
+            { code: "1075", plate: "١٤٨٩ - ب ط ع" },
+            { code: "6236", plate: "١ ٤ ٧ ٩ - ب ط ع" },
+            { code: "4427", plate: "١٤٦٦ - ب ط ع" },
+            { code: "6513", plate: "١ ٤ ٦ ٧ - ب ط ع" },
+            { code: "9968", plate: "٩٠٧٩ - ب ط ق" },
+            { code: "4154", plate: "٩٤٢٦ - ب ط ق" },
+            { code: "3594", plate: "٩ ٤ ٠ ٢ - ب ط ق" },
+            { code: "8921", plate: "٩٤٢٣ - ب ط ق" },
+            { code: "6196", plate: "١ ٤ ٧ ٢ - ب ط ع" },
+            { code: "6450", plate: "٩٩٧١ - ب س ل" },
+            { code: "4961", plate: "٦٢٢٩ - ب ص ب" },
+            { code: "7593", plate: "٥٣٢٦ - ا ص ا" },
+            { code: "9788", plate: "٨٣٤٧ - ب ص س" },
+            { code: "7646", plate: "٢١٦٩ - ا س ا" },
+            { code: "8409", plate: "٨ ٢ ٧ ٨ - ب ص س" },
+            { code: "9998", plate: "٤٤٥٤ - ب ص ب" },
+            { code: "1988", plate: "٦٢١٤ - ب ص ب" },
+            { code: "9421", plate: "٨٠٦٠ - ب ص س" },
+            { code: "9466", plate: "٩٩٤٨ - ب س ل" },
+            { code: "2795", plate: "١١٣٠ - ب ط م" },
+            { code: "3259", plate: "٣٩٢٧ - ب ص د" },
+            { code: "8744", plate: "٦٣٠٢ - ب ص ب" },
+            { code: "4978", plate: "٧٢٧٦ - ا ص ب" },
+            { code: "5179", plate: "٩٤٣٣ - ا س و" },
+            { code: "2726", plate: "٦ ٩ ٤ ٨ - ا س ل" },
+            { code: "5520", plate: "٢٢٤٦ - ا س ا" },
+            { code: "2568", plate: "٥٢٧٩ - ا س ب" },
+            { code: "9212", plate: "٦٢٤٤ - ب ص ب" },
+            { code: "7414", plate: "٥٢٨٧ - ا س ب" },
+            { code: "4639", plate: "٨٩٩٨ - ب س ن" },
+            { code: "5934", plate: "٢٠٨٨ - ا س ا" },
+            { code: "1653", plate: "٣٠٤٦ - ا س ح" },
+            { code: "7471", plate: "٢١٦١ - ا س ا" },
+            { code: "4219", plate: "٦٠٩٩ - ب ص ب" },
+            { code: "1686", plate: "٦٠٩٢ - ب ص ب" },
+            { code: "9852", plate: "٩٧٣٧ - ب ط س" },
+            { code: "9163", plate: "٣٠٣٥ - ا س ح" },
+            { code: "5865", plate: "٢٢٢٥ - ا س ا" },
+            { code: "2066", plate: "٧٦٧٦ - ا س د" },
+            { code: "7237", plate: "٨٠٥٩ - ب ص س" },
+            { code: "6199", plate: "١٤٦٨ - ا ص ح" },
+            { code: "6711", plate: "١٤٦٥ - ا ص ح" },
+            { code: "7192", plate: "١ ٤ ٥ ٣ - ا ص ح" },
+            { code: "1100", plate: "٥١٨٧ - ا ص ر" },
+            { code: "8408", plate: "٩٧٠٠ - ب ص ح" },
+            { code: "2185", plate: "٦٠٢٠ - ا ص ر" },
+            { code: "4230", plate: "٥٦٩٢ - ا س ك" },
+            { code: "9854", plate: "٩ ٤ ٢ ٨ - ا ص س" },
+            { code: "7904", plate: "٢١٨٧ - ا س ا" },
+            { code: "4101", plate: "٦٨٣٨ - ا ص ر" },
+            { code: "4166", plate: "٦٨٨٦ - ب س ل" },
+            { code: "8649", plate: "٢٢٦٨ - ب س ن" },
+            { code: "3143", plate: "٥٤٠٤ - ا ص ص" },
+            { code: "1804", plate: "٥٥٣٢ - ا ص ص" },
+            { code: "2839", plate: "٧٩٠٢ - ا ص ا" },
+            { code: "7615", plate: "٣٠١٢ - ا س ح" },
+            { code: "5680", plate: "٤ ١ ١ ٧ - ا ص ب" },
+            { code: "4443", plate: "١٢٣٤ - ه ك" },
+            { code: "8688", plate: "٦ ٩ ٦ ١ - ب ق ن" },
+            { code: "2992", plate: "٢٠١١ - ا ص ر" },
+            { code: "2660", plate: "٤ ١ ٥ ٠ - ا ص ب" },
+            { code: "6300", plate: "٢٠٢٨ - ا ص ر" },
+            { code: "5496", plate: "٨٨٤٠ - ا س ك" },
+            { code: "2037", plate: "٢٠٩٥ - ا ص ر" },
+            { code: "7755", plate: "٢٠٥٠ - ا ص ر" },
+            { code: "3054", plate: "٢٠٤٢ - ا ص ر" },
+            { code: "6999", plate: "٢٠٧٢ - ا ص ر" },
+            { code: "1152", plate: "٢٠٧٣ - ا ص ر" },
+            { code: "6391", plate: "٢٠٦٩ - ا ص ر" },
+            { code: "1075", plate: "٩ ٨ ٨ ١ - ب ط ق" },
+            { code: "3653", plate: "٨٥٤٩ - ب س ر" },
+            { code: "6315", plate: "٢١٧١ - ب س ل" },
+            { code: "5692", plate: "٩٠٧٦ - ب س م" },
+            { code: "6115", plate: "٤ ٨ ٨ ٤ - ا ر ع" },
+            { code: "9060", plate: "٦٦٦٦ - ا ا ا" },
+            { code: "2192", plate: "٢٠٣٤ - ا ص ر" },
+            { code: "2537", plate: "٧٩١٥ - ا ص ن" },
+            { code: "5184", plate: "٢٢٣٦ - ب د ا" },
+            { code: "9162", plate: "٤٠٤٦ - ا ص ه" },
+            { code: "9307", plate: "٩٤١٣ - ب ط ق" },
+            { code: "3319", plate: "٦٥٠٠ - ب ر ى" },
+            { code: "2346", plate: "٩١١٠ - ب س م" },
+            { code: "9793", plate: "٩٠٦٣ - ب س م" },
+            { code: "9144", plate: "٧٩٢٦ - ب ر و" },
+            { code: "8170", plate: "٦٤٨٢ - ب ر ى" },
+            { code: "7076", plate: "٦٤٩٤ - ب ر ى" },
+            { code: "6658", plate: "٤٧٩٠ - ا ص ه" },
+            { code: "1829", plate: "٤٧٩٣ - ا ص ه" },
+            { code: "7338", plate: "٤٨١٩ - ا ص ه" },
+            { code: "3633", plate: "٦ ٦ ٩ ٧ - ا د ك" },
+            { code: "4160", plate: "٤٥٨١ - ا ص ك" },
+            { code: "3080", plate: "٦ ٨ ٠ ٦ - ا ص ى" },
+            { code: "3650", plate: "٦٨٠٧ - ا ص ى" },
+            { code: "8847", plate: "٦ ٨ ٠ ٩ - ا ص ى" },
+            { code: "3094", plate: "٦ ٨ ١ ٢ - ا ص ى" },
+            { code: "6472", plate: "٢ ٢ ٩ ٠ - ب س ن" },
+            { code: "7210", plate: "٥٩٠٧ - ب س ط" },
+            { code: "9393", plate: "٤ ٠ ٦ ٤ - ا ص ه" },
+            { code: "1807", plate: "١٥٦٢ - ب س ط" },
+            { code: "5602", plate: "٦٤٩٦ - ب ر ى" },
+            { code: "6698", plate: "٨٥٥٥ - ب س ر" },
+            { code: "8596", plate: "٦٤٧٩ - ب ر ى" },
+            { code: "6757", plate: "٦٤٩٥ - ب ر ى" },
+            { code: "7773", plate: "٤ ٣ ٩ ٨ - ب س ع" },
+            { code: "2545", plate: "٨ ٥ ٧ ٠ - ب س ر" },
+            { code: "4024", plate: "٦ ٤ ٧ ٧ - ب ر ى" },
+            { code: "2111", plate: "١ ٣ ٨ ٩ - ب ص ب" },
+            { code: "7808", plate: "٨ ٥ ٥ ٤ - ب س ر" },
+            { code: "3448", plate: "٦ ٤ ٧ ٥ - ب ر ى" },
+            { code: "2162", plate: "٤ ٢ ٥ ٩ - ب ر و" },
+            { code: "1933", plate: "٤ ٧ ٩ ٧ - ب ص ك" },
+            { code: "1764", plate: "٤٨٢٦ - ا ص ه ـ" },
+            { code: "5385", plate: "٤ ٢ ٦ ١ - ب ر و" },
+            { code: "5737", plate: "٨ ٥ ٦ ٤ - ب س ر" },
+            { code: "5555", plate: "٣ ٥ ٣ ٤ - ب ص ح" },
+            { code: "7021", plate: "٨ ٦ ٨ ٢ - ب س د" },
+            { code: "8428", plate: "٤ ٨ ٠ ٢ - ا ص ه" },
+            { code: "4676", plate: "٣ ٠ ٩ ٨ - ا ط ب" },
+            { code: "9077", plate: "٣ ٠ ٩ ٠ - ا ط ب" },
+            { code: "9763", plate: "٣ ٠ ٨ ٢ - ا ط ب" },
+            { code: "5909", plate: "٣ ٠ ٨ ٩ - ا ط ب" },
+            { code: "5113", plate: "٦ ٦ ٤ ٦ - ب ق ق" },
+            { code: "6734", plate: "٦ ٦ ٣ ١ - ب ق ق" },
+            { code: "7313", plate: "٤ ٨ ١ ٢ - ا ص ه" },
+            { code: "4076", plate: "٤٨٢١ - ا ص ه ـ" },
+            { code: "9166", plate: "٣٠٨٥ - ا ط ب" },
+            { code: "4899", plate: "٦ ٨ ٠ ١ - ا ص ى" },
+            { code: "9625", plate: "٦٨٤٥ - ا ص ى" },
+            { code: "3372", plate: "٦ ٨ ٤ ٦ - ا ص ى" },
+            { code: "9610", plate: "٦ ٨ ٦ ٥ - ا ص ى" },
+            { code: "7208", plate: "٦ ٨ ٦ ٧ - ا ص ى" },
+            { code: "4287", plate: "٦ ٨ ٣ ٣ - ا ص ى" },
+            { code: "6855", plate: "٤ ٠ ٠ ٧ - ا ص ه" },
+            { code: "1234", plate: "٨ ٥ ٥ ١ - ب س ر" },
+            { code: "2990", plate: "٦ ٤ ٨ ٠ - ب ر ى" },
+            { code: "7573", plate: "٨ ٥ ٥ ٨ - ب س ر" },
+            { code: "3848", plate: "٨٢٤٤ - ا ط س" },
+            { code: "1964", plate: "٨٢٤١ - ا ط س" },
+            { code: "7286", plate: "٤ ٨ ٧ ٩ - ا ط س" },
+            { code: "9152", plate: "٨٢٤٢ - ا ط س" },
+            { code: "3187", plate: "٧ ٧ ٣ ١ - ا ط س" },
+            { code: "2313", plate: "٦ ٩ ٦ ٣ - ب ق ن" },
+            { code: "2875", plate: "٦٩٥٢ - ب ق ن" },
+            { code: "3116", plate: "٦ ٩ ٦ ٧ - ب ق ن" },
+            { code: "5712", plate: "٦ ٩ ٦ ١ - ب ق ن" },
+            { code: "6543", plate: "٧ ٥ ٣ ٠ - ا ط ب" },
+            { code: "1588", plate: "٧٥٣٢ - ا ط ب" },
+            { code: "9622", plate: "٣٧٤٤ - ب ط ص" },
+            { code: "6298", plate: "٧٩٦٨ - ا ط س" },
+            { code: "8117", plate: "٨٥٥٤ - ا س ر" },
+            { code: "7168", plate: "١ ٣ ٦ ٩ - ب ص ب" },
+            { code: "8052", plate: "٦٩٠٣ - ب ق ن" },
+            { code: "4763", plate: "٦ ٨ ٦ ٠ - ا ص ى" },
+            { code: "7153", plate: "٦٩٥١ - ب ق ن" },
+            { code: "6518", plate: "٦٧٠٣ - ب ق ن" },
+            { code: "1268", plate: "٦ ٩ ٤ ٧ - ب ق ن" },
+            { code: "8369", plate: "٦ ٩ ٣ ٨ - ب ق ن" },
+            { code: "4137", plate: "٧ ٥ ٣ ٨ - ا ط ب" },
+            { code: "5454", plate: "٦ ٨ ٠ ٣ - ا ص ى" },
+            { code: "3805", plate: "٦ ٩ ٦ ٨ - ب ق ن" },
+            { code: "5227", plate: "٦ ٨ ١ ٨ - ا ص ى" },
+            { code: "7455", plate: "٦ ٨ ٢ ٢ - ا ص ى" },
+            { code: "9403", plate: "٦ ٨ ٣ ٤ - ا ص ى" },
+            { code: "5348", plate: "٦ ٩ ٤ ٣ - ب ق ن" },
+            { code: "6049", plate: "٣٤٥٥ - ا ط ح" },
+            { code: "7984", plate: "٦٨٠٨ - ا ص ى" },
+            { code: "7284", plate: "٦٨٠٤ - ا ص ى" },
+            { code: "8926", plate: "٨ ١ ٩ ٥ - ا ص ن" },
+            { code: "6080", plate: "٩ ٨ ٩ ٠ - ب ط ق" },
+            { code: "8108", plate: "١ ٠ ٠ ٦ - ح" },
+            { code: "4292", plate: "١ ٠ ١ ٦ - ح" },
+            { code: "6232", plate: "1480 ETB" },
+            { code: "6428", plate: "٣ ٠ ٩ ٦ - ا ط ب" },
+            { code: "5598", plate: "6817 VXA" },
+            { code: "4612", plate: "١ ٠ ٠ ٠ - ك" },
+            { code: "5424", plate: "6832 VXA" },
+            { code: "5710", plate: "4884 ERA" },
+            { code: "7926", plate: "8198 NXA" },
+            { code: "1897", plate: "٧ ٩ ٦ ٩ - ا ط س" },
+            { code: "9159", plate: "٦ ٩ ٨ ٢ - ب ق ن" },
+            { code: "4895", plate: "٦ ٩ ٤ ٩ - ب ق ن" },
+            { code: "5964", plate: "٦ ٩ ٥ ٧ - ب ق ن" },
+            { code: "5142", plate: "٦ ٧ ٠ ٢ - ب ق ن" },
+            { code: "7637", plate: "٣ ٧ ٤ ١ - ب ط ص" },
+            { code: "7781", plate: "4005 HXA" },
+            { code: "1975", plate: "٦ ٧ ٠ ٦ - ب ق ن" },
+            { code: "1058", plate: "8181 NXA" },
+            { code: "9534", plate: "9398 LEB" },
+            { code: "7818", plate: "9609 SGB" },
+            { code: "6708", plate: "9395 LEB" },
+            { code: "3288", plate: "5014 AGB" },
+            { code: "3102", plate: "٥ ٤ ٧ ٤ - د ط أ" },
+            { code: "3385", plate: "٤ ٦ ٩ ٩ - د ك ك" },
+            { code: "2308", plate: "٦ ٩ ٣ ٩ - ب ص ك" },
+            { code: "5398", plate: "٦ ٩ ٤ ٢ - ب ص ك" },
+            { code: "3920", plate: "٤ ٧ ٥ ٨ - أ و م" },
+            { code: "7995", plate: "٤ ٧ ٣ ٨ - ب ص ع" },
+            { code: "9052", plate: "٦ ١ ٢ ٦ - ب ص ك" },
+            { code: "9811", plate: "٦ ١ ٥ ٧ - ب ص ك" },
+            { code: "9191", plate: "٢ ٠ ٢ ٦ - أ س أ" },
+            { code: "2682", plate: "٢ ٠ ٢ ٧ - أ س أ" },
+            { code: "7249", plate: "٤ ٥ ٨ ٤ - ب ص ط" },
+            { code: "8631", plate: "٤ ٨ ٨ ١ - ب س ل" },
+            { code: "8815", plate: "٨ ١ ٣ ٢ - أ س ح" },
+            { code: "1104", plate: "٤ ٨ ٠ ٢ - ب س ل" },
+            { code: "9181", plate: "٨ ١ ٠ ٨ - د ب و" },
+            { code: "6646", plate: "١ ٤ ٥ ١ - د ص ط" },
+            { code: "8765", plate: "٧ ١ ٢ ٠ - د س ط" },
+            { code: "4680", plate: "٥ ١ ١ ٩ - د ك ك" },
+            { code: "4842", plate: "٤ ٥ ٨ ٧ - د ب ع" },
+            { code: "3982", plate: "٦ ٣ ١ ٩ - د ه س" },
+            { code: "2068", plate: "٧ ٢ ٤ ٩ - ب س ك" },
+            { code: "8136", plate: "٦ ٣ ٣ ٢ - ح ه ب" },
+            { code: "5978", plate: "٧ ٤ ٣ ٣ - ب ص ط" },
+            { code: "2461", plate: "٢ ٣ ٤ ٩ - أ س أ" },
+            { code: "4124", plate: "٤ ٥ ٧ ٠ - ب ص ط" },
+            { code: "3511", plate: "٨ ٤ ٥ ٨ - ب ص ن" },
+            { code: "4594", plate: "٣ ٧ ٢ ٨ - ب ط ص" },
+            { code: "8823", plate: "٣٧٢٠ - ب ط ص" },
+            { code: "9728", plate: "٩٧٤٨ - ب ط س" },
+            { code: "6119", plate: "٣ ٧ ١ ٩ - ب ط ص" },
+            { code: "6975", plate: "١ ٤ ٦ ٨ - ب ط ع" },
+            { code: "9291", plate: "٦ ٣ ٤ ٨ - ب ط ا" },
+            { code: "5918", plate: "٩ ٣ ٧ ٣ - ا ص ق" },
+            { code: "1133", plate: "٧ ٣ ٥ ٢ - ا س م" },
+            { code: "4305", plate: "٥٥٠٩ - ا ص ا" },
+            { code: "7919", plate: "٨ ٠ ٥ ٧ - ب ص س" },
+            { code: "9063", plate: "٩ ٥ ٣ ٨ - ا س ى" },
+            { code: "3993", plate: "١٤٦٠ - ب ط ع" },
+            { code: "5922", plate: "٧ ٠ ٨ ٢ - ا ص ح" },
+            { code: "4807", plate: "٢ ٣ ٣ ٢ - ا ص ب" },
+            { code: "1349", plate: "٩ ٠ ٦ ٧ - ا ر ح" },
+            { code: "2804", plate: "٦ ٤ ٧ ٠ - ب ص ب" },
+            { code: "8631", plate: "٦ ٧ ٤ ٤ - ا س ع" },
+            { code: "8709", plate: "٨ ٠ ٦ ٣ - ب ص س" },
+            { code: "3486", plate: "٨ ٣ ٢ ٣ - ب ص س" },
+            { code: "8763", plate: "٦ ٤ ٦ ٩ - ب ص ب" },
+            { code: "6187", plate: "٦ ٧ ٨ ٠ - ا س ل" },
+            { code: "5379", plate: "٨ ٠ ٧ ٦ - ب ص س" },
+            { code: "4169", plate: "١ ٨ ٠ ٧ - ا ص د" },
+            { code: "3002", plate: "٨ ٣ ١ ١ - ا ص ط" },
+            { code: "8908", plate: "١ ٩ ١ ٢ - ا ص د" },
+            { code: "4855", plate: "٢ ٠ ٦ ٣ - ا ص ط" },
+            { code: "9711", plate: "١ ٨ ٠ ٤ - ا ص د" },
+            { code: "5410", plate: "٩ ٥ ٧ ٦ - ب ص ح" },
+            { code: "1290", plate: "٦ ٥ ٧ ٣ - ا س ل" },
+            { code: "8020", plate: "١ ٤ ٦ ٠ - ا ص ح" },
+            { code: "1652", plate: "٧ ٩ ٢ ٢ - ا ص ق" },
+            { code: "5881", plate: "٩ ٥ ٥ ٨ - ا س ى" },
+            { code: "8833", plate: "٩ ٥ ٥ ١ - ا س ى" },
+            { code: "4899", plate: "٦ ٢ ٣ ٣ - ا ص ر" },
+            { code: "6723", plate: "٨ ٨ ١ ٢ - ا س و" },
+            { code: "3233", plate: "٩ ٦ ١ ١ - ا س ع" },
+            { code: "7922", plate: "١ ٨ ٣ ٦ - ا ص د" },
+            { code: "2073", plate: "١ ٨ ٠ ١ - ا ص د" },
+            { code: "8800", plate: "٧ ٠ ٨ ٦ - ا ص ح" },
+            { code: "4026", plate: "٣ ٦ ٦ ٦ - ا س م" },
+            { code: "4323", plate: "٥ ٤ ١ ٦ - ا ص ص" },
+            { code: "7957", plate: "٣ ٤ ٧ ٥ - ا ص ص" },
+            { code: "3409", plate: "٢ ٠ ٧ ٣ - ا ص ط" },
+            { code: "1507", plate: "١ ٠ ١ ٢ - ب س ا" },
+            { code: "8695", plate: "٦ ٢ ٧ ٠ - ا ص ا" },
+            { code: "5470", plate: "٦ ٩ ٠ ٢ - ر م ه" },
+            { code: "5190", plate: "٢ ٠ ٠ ٤ - ا ص ر" },
+            { code: "1443", plate: "٤ ٨ ٨ ٥ - ا ص ط" },
+            { code: "9319", plate: "٧ ٣ ٦ ١ - ا ص ب" },
+            { code: "9980", plate: "٢٠٥٣ - ا ص ر" },
+            { code: "3379", plate: "١ ١ ٥ ٥ - ا ص ص" },
+            { code: "1285", plate: "٢ ٩ ٠ ٩ - ب ع ق" },
+            { code: "3021", plate: "٢ ٠ ٧ ٢ - ا ص ط" },
+            { code: "4089", plate: "٢ ٨ ٩ ٨ - ب ع ق" },
+            { code: "5485", plate: "٩ ٣ ٧ ٤ - ب ع ل" },
+            { code: "4226", plate: "٤ ٧ ٣ ٧ - ب ع س" },
+            { code: "7914", plate: "٤ ٧ ٣ ٢ - ب ع س" },
+            { code: "4767", plate: "٩ ٣ ٧ ٩ - ب ع ل" },
+            { code: "8723", plate: "٩ ٣ ٦ ٨ - ب ع ل" },
+            { code: "1707", plate: "٥ ٤ ١ ٨ - ا ص س" },
+            { code: "3366", plate: "٢ ٧ ٣ ٦ - ا س و" },
+            { code: "5724", plate: "٩ ٣ ٦ ٩ - ب ع ل" },
+            { code: "1553", plate: "٥ ٢ ٠ ٣ - ب ق ا" },
+            { code: "3051", plate: "٥ ٠ ١ ٠ - ب ق ا" },
+            { code: "8286", plate: "٩ ٣ ٦ ١ - ب ع ل" },
+            { code: "6984", plate: "٩ ٣ ٥ ٣ - ب ع ل" },
+            { code: "1544", plate: "Z043" },
+            { code: "9919", plate: "Z087" },
+            { code: "6163", plate: "٢ ٠ ٧ ١ - ا ص ط" },
+            { code: "4656", plate: "٨ ٥ ٧ ٢ - ا ص س" },
+            { code: "8614", plate: "٦ ٦ ٤ ١ - ب ق ق" },
+            { code: "4298", plate: "٦ ٦ ٤ ٣ - ب ق ق" },
+            { code: "4784", plate: "٧ ٧ ٣ ٢ - ا ط س" },
+            { code: "8306", plate: "٣ ٣ ٤ ٩ - ا ص ى" },
+            { code: "7729", plate: "٤ ١ ٩ ٠ - ا ص ه" },
+            { code: "4681", plate: "٤ ٣ ٦ ٤ - ا ص ه" },
+            { code: "9136", plate: "٦ ٩ ٤ ٩ - ب ق ن" },
+            { code: "9646", plate: "٤ ١ ٨ ٧ - ا ص ه" },
+            { code: "3293", plate: "١ ٠ ١ ٨ - ح" },
+            { code: "8451", plate: "١ ٠ ٢ ٠ - ح" },
+            { code: "1400", plate: "٩ ٣ ٧ ٤ - ب ع ل" },
+            { code: "8717", plate: "٩ ٣ ٧ ٩ - ب ع ل" },
+            { code: "6428", plate: "٤ ٢ ٠ ٧ - ا ص ه" },
+            { code: "7645", plate: "٣ ٩ ٥ ٦ - ب ص ح" },
+            { code: "6873", plate: "6899 VXA" },
+            { code: "2455", plate: "6895 VXA" },
+            { code: "5768", plate: "3712 XTB" },
+            { code: "8851", plate: "M-1000" }
         ];
 
         // ==================== الترجمة الكاملة ====================
@@ -1219,8 +1686,8 @@
                 app_subtitle: "مجموعة الزهراني",
                 search_by_plate: "بحث بلوحة",
                 search_by_code: "بحث بكود",
-                search_plate_placeholder: "أدخل رقم اللوحة (مثال: ٧ ٥ ٠ ٣ - س ص ب)",
-                search_code_placeholder: "أدخل كود الشريحة (مثال: 2213)",
+                search_plate_placeholder: "أدخل رقم اللوحة (مثال: 1480 ETB)",
+                search_code_placeholder: "أدخل كود الشريحة (مثال: 6232)",
                 search_plate_btn: "بحث عن الكود",
                 search_code_btn: "بحث عن اللوحة",
                 result_text: "نتيجة البحث",
@@ -1266,8 +1733,8 @@
                 app_subtitle: "Al-Zahrani Group",
                 search_by_plate: "Search by Plate",
                 search_by_code: "Search by Code",
-                search_plate_placeholder: "Enter plate number (e.g., 7503 SXB)",
-                search_code_placeholder: "Enter chip code (e.g., 2213)",
+                search_plate_placeholder: "Enter plate number (e.g., 1480 ETB)",
+                search_code_placeholder: "Enter chip code (e.g., 6232)",
                 search_plate_btn: "Search Code",
                 search_code_btn: "Search Plate",
                 result_text: "Search Result",
@@ -1388,12 +1855,13 @@
 
         // ==================== تحميل البيانات ====================
         function loadLocalData() {
-            const saved = localStorage.getItem('zahrani_data');
+            const saved = localStorage.getItem('zahrani_data_v4');
             if (saved) {
                 try {
                     localData = JSON.parse(saved);
+                    console.log('✅ تم تحميل البيانات:', Object.keys(localData.plates).length, 'لوحة');
                 } catch (e) {
-                    console.error('Error loading data:', e);
+                    console.error('❌ خطأ في تحميل البيانات:', e);
                     initializeData();
                 }
             } else {
@@ -1404,21 +1872,24 @@
         }
 
         function initializeData() {
+            console.log('🔄 جاري تهيئة البيانات لأول مرة...');
             // إضافة البيانات من الملف
             PLATES_DATA.forEach((item, index) => {
-                if (item.plate && item.plate !== '-' && item.code) {
-                    localData.plates['plate_' + index + '_' + Date.now()] = {
-                        plate: item.plate,
-                        code: item.code,
+                if (item.plate && item.plate !== '-' && item.plate.trim() !== '' && item.code) {
+                    const key = 'plate_' + Date.now() + '_' + index + '_' + Math.random().toString(36).substr(2, 5);
+                    localData.plates[key] = {
+                        plate: item.plate.trim(),
+                        code: item.code.trim(),
                         project: ''
                     };
                 }
             });
+            console.log('✅ تمت تهيئة', Object.keys(localData.plates).length, 'لوحة');
             saveLocalData();
         }
 
         function saveLocalData() {
-            localStorage.setItem('zahrani_data', JSON.stringify(localData));
+            localStorage.setItem('zahrani_data_v4', JSON.stringify(localData));
             updateStats();
             renderPlatesList();
             renderProjectsList();
@@ -1432,42 +1903,6 @@
             document.getElementById('total-projects-count').textContent = projectsCount;
             document.getElementById('admin-total-plates').textContent = platesCount;
             document.getElementById('admin-total-projects').textContent = projectsCount;
-        }
-
-        // ==================== توحيد صيغة اللوحة ====================
-        const arabicToEnglishMap = {
-            'أ': 'A', 'ا': 'A', 'إ': 'A', 'آ': 'A',
-            'ب': 'B',
-            'ح': 'J',
-            'د': 'D',
-            'ر': 'R',
-            'س': 'S',
-            'ص': 'X',
-            'ط': 'T',
-            'ع': 'E',
-            'ق': 'G',
-            'ك': 'K',
-            'ل': 'L',
-            'م': 'Z',
-            'ن': 'N',
-            'ه': 'H', 'هـ': 'H',
-            'و': 'U',
-            'ى': 'V', 'ي': 'V'
-        };
-
-        function standardizePlate(input) {
-            if (!input) return '';
-            let s = String(input).trim();
-            
-            // استبدال الأرقام العربية
-            const arabicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
-            s = s.replace(/[٠-٩]/g, w => arabicDigits.indexOf(w).toString());
-            
-            s = s.toUpperCase();
-            s = s.split('').map(char => arabicToEnglishMap[char] || char).join('');
-            s = s.replace(/[^A-Z0-9]/g, '');
-            
-            return s;
         }
 
         // ==================== دوال البحث ====================
@@ -1494,16 +1929,47 @@
                 return;
             }
 
-            const target = standardizePlate(query);
+            console.log('🔍 البحث عن لوحة:', query);
+            
             const records = Object.entries(localData.plates || {});
+            console.log('📊 عدد السجلات:', records.length);
             
             let found = null;
+            
+            // بحث دقيق (مطابقة تامة)
             for (const [key, item] of records) {
                 if (!item || !item.plate) continue;
-                const plateStd = standardizePlate(item.plate);
-                if (plateStd === target) {
+                if (item.plate === query) {
                     found = item;
+                    console.log('✅ تم العثور على مطابقة تامة:', item);
                     break;
+                }
+            }
+            
+            // إذا لم نجد، نبحث بحذف المسافات
+            if (!found) {
+                const queryNoSpaces = query.replace(/\s+/g, '');
+                for (const [key, item] of records) {
+                    if (!item || !item.plate) continue;
+                    const plateNoSpaces = item.plate.replace(/\s+/g, '');
+                    if (plateNoSpaces === queryNoSpaces) {
+                        found = item;
+                        console.log('✅ تم العثور على مطابقة بدون مسافات:', item);
+                        break;
+                    }
+                }
+            }
+            
+            // إذا لم نجد، نبحث بجزء من النص
+            if (!found) {
+                const queryLower = query.toLowerCase();
+                for (const [key, item] of records) {
+                    if (!item || !item.plate) continue;
+                    if (item.plate.toLowerCase().includes(queryLower)) {
+                        found = item;
+                        console.log('✅ تم العثور على مطابقة جزئية:', item);
+                        break;
+                    }
                 }
             }
 
@@ -1515,6 +1981,7 @@
             } else {
                 resultBox.classList.add('hidden');
                 errorBox.classList.remove('hidden');
+                console.log('❌ لم يتم العثور على اللوحة');
             }
         };
 
@@ -1530,13 +1997,31 @@
                 return;
             }
 
+            console.log('🔍 البحث عن كود:', query);
+            
             const records = Object.entries(localData.plates || {});
             let found = null;
             
+            // بحث دقيق
             for (const [key, item] of records) {
                 if (item && item.code && item.code.trim() === query.trim()) {
                     found = item;
+                    console.log('✅ تم العثور على:', item);
                     break;
+                }
+            }
+            
+            // بحث مع إزالة الأصفار
+            if (!found) {
+                const queryWithoutLeadingZeros = query.replace(/^0+/, '');
+                for (const [key, item] of records) {
+                    if (!item || !item.code) continue;
+                    const codeWithoutLeadingZeros = item.code.replace(/^0+/, '');
+                    if (codeWithoutLeadingZeros === queryWithoutLeadingZeros) {
+                        found = item;
+                        console.log('✅ تم العثور على بعد إزالة الأصفار:', item);
+                        break;
+                    }
                 }
             }
 
@@ -1548,6 +2033,7 @@
             } else {
                 resultBox.classList.add('hidden');
                 errorBox.classList.remove('hidden');
+                console.log('❌ لم يتم العثور على الكود');
             }
         };
 
